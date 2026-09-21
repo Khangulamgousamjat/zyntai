@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+*.log
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Recovery exports kept outside the deployable app
+Lastest changes/
+Zyntai(bckup)/
