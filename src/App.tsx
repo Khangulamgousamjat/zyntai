@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Lenis from "lenis";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider, useTheme } from "./lib/theme";
 import { EASE } from "./lib/motion";
 import Layout from "./components/Layout";
@@ -12,26 +11,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 
-/* buttery smooth scrolling + eased anchor navigation */
-function useLenis(reduce: boolean | null, enabled: boolean) {
+/* Instant native hardware-accelerated scroll + smooth anchor navigation */
+function useSmoothAnchorScroll() {
   useEffect(() => {
-    if (reduce || !enabled) return;
-    const lenis = new Lenis({
-      duration: 0.6,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1.2,
-      touchMultiplier: 1.5,
-    });
-    let raf = 0;
-    const loop = (t: number) => {
-      lenis.raf(t);
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-
     const onAnchor = (e: MouseEvent) => {
       const a = (e.target as HTMLElement).closest?.('a[href^="#"]');
       if (!a) return;
@@ -40,16 +22,13 @@ function useLenis(reduce: boolean | null, enabled: boolean) {
       const el = document.querySelector(id);
       if (el) {
         e.preventDefault();
-        lenis.scrollTo(el as HTMLElement, { offset: -84, duration: 0.7, easing: (p) => 1 - Math.pow(1 - p, 4) });
+        const top = el.getBoundingClientRect().top + window.scrollY - 84;
+        window.scrollTo({ top, behavior: "smooth" });
       }
     };
     document.addEventListener("click", onAnchor);
-    return () => {
-      cancelAnimationFrame(raf);
-      lenis.destroy();
-      document.removeEventListener("click", onAnchor);
-    };
-  }, [enabled, reduce]);
+    return () => document.removeEventListener("click", onAnchor);
+  }, []);
 }
 
 /* first-paint curtain */
@@ -92,10 +71,8 @@ function Intro({ done }: { done: boolean }) {
 
 function Site() {
   const [ready, setReady] = useState(false);
-  const reduce = useReducedMotion();
   const { theme } = useTheme();
-  const { pathname } = useLocation();
-  useLenis(reduce, pathname === "/");
+  useSmoothAnchorScroll();
 
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 1100);

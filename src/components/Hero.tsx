@@ -4,8 +4,6 @@ import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
   type Variants,
 } from "framer-motion";
 import Embers from "./Embers";
@@ -551,18 +549,9 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
 export default function Hero({ introReady = true }: { introReady?: boolean }) {
   const [demoOpen, setDemoOpen] = useState(false);
   const reduce = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const yContent = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -40]);
-  const yMockup = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 50]);
-  const fadeContent = useTransform(scrollYProgress, [0, 0.85], [1, 0.3]);
 
   return (
-    <section ref={sectionRef} id="top" className="relative overflow-hidden pt-36 sm:pt-44">
+    <section id="top" className="relative overflow-hidden pt-36 sm:pt-44">
       {/* layered backdrop */}
       <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(75%_65%_at_50%_30%,black,transparent)]" />
       <div className="pointer-events-none absolute inset-0">
@@ -574,7 +563,7 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
       <Embers />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <motion.div className="max-w-5xl" style={{ y: yContent, opacity: fadeContent }}>
+        <div className="max-w-5xl">
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -668,10 +657,10 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
               </p>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* mockup */}
-        <motion.div style={{ y: yMockup }} className="relative mt-16 pb-10 sm:mt-20 lg:pb-16">
+        <div className="relative mt-16 pb-10 sm:mt-20 lg:pb-16">
           <FloatChips />
           <RotatingBadge />
           <DashboardMockup />
@@ -688,7 +677,7 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
             </span>
             Live product preview — orders stream in every few seconds
           </motion.p>
-        </motion.div>
+        </div>
       </div>
 
       <DemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />

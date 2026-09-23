@@ -4,8 +4,6 @@ import {
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
-  useSpring,
-  useTransform,
 } from "framer-motion";
 import { STEPS } from "../lib/data";
 import { EASE_SWING, Reveal } from "../lib/motion";
@@ -16,32 +14,15 @@ const STEP_SHORT = ["Connect", "Share", "Grow"];
 const STEP_TAIL = ["your catalog", "your link", "automatically"];
 
 function StepCard({ s, i }: { s: (typeof STEPS)[number]; i: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const dir = i % 2 === 0 ? -1 : 1;
-
-  /* entrance — card glides in as its wrapper approaches the viewport centre */
-  const enter = useScroll({ target: ref, offset: ["start 0.92", "start 0.5"] });
-  const y = useTransform(enter.scrollYProgress, [0, 1], [reduce ? 0 : 40, 0]);
-  const opacity = useTransform(enter.scrollYProgress, [0, 0.45, 1], [reduce ? 1 : 0, 1, 1]);
-
-  /* exit — card recedes gently as the next one slides over it */
-  const exit = useScroll({ target: ref, offset: ["start 0.15", "end 0.55"] });
-  const scale = useTransform(exit.scrollYProgress, [0, 1], [1, reduce ? 1 : 0.96]);
-  const dim = useTransform(exit.scrollYProgress, [0, 1], [1, reduce ? 1 : 0.55]);
-
   const Icon = STEP_ICONS[i];
 
   return (
-    <div ref={ref} className="lg:h-[108vh] last:lg:h-auto">
-      <motion.div
+    <div className="lg:h-[85vh] last:lg:h-auto" data-step-card>
+      <div
         style={{
-          y,
-          opacity,
-          scale,
           zIndex: i + 1,
         }}
-        className="group surface-solid backface-hidden relative overflow-hidden rounded-[1.25rem] p-8 transition-[border-color,box-shadow] duration-500 will-change-transform hover:border-amber-400/40 hover:shadow-[0_30px_90px_-30px_rgba(245,158,11,0.4)] lg:sticky lg:top-[26vh] sm:p-10"
+        className="group surface-solid relative overflow-hidden rounded-[1.25rem] p-8 transition-[border-color,box-shadow] duration-300 hover:border-amber-400/40 hover:shadow-[0_30px_90px_-30px_rgba(245,158,11,0.4)] lg:sticky lg:top-[26vh] sm:p-10"
       >
         <span
           aria-hidden
@@ -77,8 +58,7 @@ function StepCard({ s, i }: { s: (typeof STEPS)[number]; i: number }) {
           <span className="hidden h-px flex-1 bg-gradient-to-r from-white/12 to-transparent sm:block" />
         </div>
 
-        <motion.span aria-hidden style={{ opacity: dim }} className="pointer-events-none absolute inset-0 hidden" />
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -92,7 +72,7 @@ export default function HowItWorks() {
     target: colRef,
     offset: ["start 0.75", "end 0.6"],
   });
-  const fill = useSpring(scrollYProgress, { stiffness: 110, damping: 26 });
+  const fill = scrollYProgress;
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const idx = Math.min(2, Math.max(0, Math.floor(v * 3.001)));

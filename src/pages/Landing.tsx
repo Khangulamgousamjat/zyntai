@@ -16,12 +16,16 @@ import { FinalCta } from "../components/Closing";
 function MobileCta() {
   const [show, setShow] = useState(false);
   useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      const cta = document.getElementById("cta");
-      const near = cta ? cta.getBoundingClientRect().top < window.innerHeight + 140 : false;
-      setShow(window.scrollY > 640 && !near);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setShow(window.scrollY > 640);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
