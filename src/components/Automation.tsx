@@ -31,7 +31,7 @@ export default function Automation() {
 
   return (
     <section id="story" className="relative overflow-hidden py-20 sm:py-28">
-      <div className="absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-amber-500/[0.07] blur-3xl" />
+      <div className="absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-violet-600/[0.04] blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
         {/* chat mockup */}
@@ -43,23 +43,23 @@ export default function Automation() {
           style={{ transformPerspective: 1200 }}
           className="relative order-2 lg:order-1"
         >
-          <div className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(60%_60%_at_40%_40%,rgba(245,158,11,0.14),transparent_70%)] blur-2xl" />
+          <div className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(60%_60%_at_40%_40%,rgba(124,58,237,0.1),transparent_70%)] blur-2xl pointer-events-none" />
 
-          <div className="glass relative overflow-hidden rounded-[1.25rem] p-5 shadow-[0_40px_100px_-30px_rgba(15,17,21,0.4)] sm:p-6">
-            <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+          <div className="glass relative overflow-hidden rounded-[1.25rem] border border-char-700/60 p-5 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.5)] sm:p-6">
+            <div className="flex items-center justify-between border-b border-char-700/60 pb-4">
               <div className="flex items-center gap-2.5">
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-amber-300 to-orange-500 text-(--zy-amber-ink)">
+                <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-600 text-white shadow-sm">
                   <IconChat className="h-4.5 w-4.5" />
                 </span>
                 <div>
                   <p className="font-display text-[0.85rem] font-bold text-zinc-100">Zyntai Assistant</p>
-                  <p className="flex items-center gap-1.5 text-[0.66rem] text-emerald-300">
+                  <p className="flex items-center gap-1.5 text-[0.66rem] text-emerald-400">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-dot" />
                     online · replies in ~1s
                   </p>
                 </div>
               </div>
-              <span className="rounded-full border border-amber-400/25 bg-amber-400/[0.08] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-amber-300">
+              <span className="rounded-full border border-violet-500/25 bg-violet-500/10 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-violet-400">
                 Trained on your catalog
               </span>
             </div>
@@ -77,12 +77,12 @@ export default function Automation() {
                     <div
                       className={`max-w-[82%] rounded-2xl px-4 py-2.5 text-[0.85rem] leading-relaxed ${
                         c.from === "customer"
-                          ? "rounded-br-md border border-white/[0.08] bg-white/[0.05] text-zinc-200"
-                          : "rounded-bl-md border border-amber-400/25 bg-amber-400/[0.08] text-zinc-100"
+                          ? "rounded-br-md border border-char-700 bg-char-800 text-zinc-200"
+                          : "rounded-bl-md border border-violet-600/40 bg-violet-600 text-white"
                       }`}
                     >
                       {c.from === "zyntai" && (
-                        <span className="mb-1 block text-[0.6rem] font-bold uppercase tracking-wider text-amber-300">
+                        <span className="mb-1 block text-[0.6rem] font-bold uppercase tracking-wider text-violet-200">
                           Zyntai AI
                         </span>
                       )}
@@ -93,9 +93,9 @@ export default function Automation() {
               </AnimatePresence>
               {!done && !reduce && (
                 <div className="flex justify-start">
-                  <div className="flex items-center gap-1 rounded-2xl rounded-bl-md border border-amber-400/25 bg-amber-400/[0.08] px-4 py-3">
+                  <div className="flex items-center gap-1 rounded-2xl rounded-bl-md border border-char-700 bg-char-800 px-4 py-3">
                     {[0, 1, 2].map((i) => (
-                      <span key={i} className="h-1.5 w-1.5 animate-bounce rounded-full bg-amber-300" style={{ animationDelay: `${i * 0.15}s` }} />
+                      <span key={i} className="h-1.5 w-1.5 animate-bounce rounded-full bg-violet-400" style={{ animationDelay: `${i * 0.15}s` }} />
                     ))}
                   </div>
                 </div>
@@ -108,9 +108,9 @@ export default function Automation() {
                   initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="flex items-center justify-between rounded-xl border border-emerald-400/20 bg-emerald-400/[0.06] px-4 py-3"
+                  className="flex items-center justify-between rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-4 py-3"
                 >
-                  <p className="flex items-center gap-2 text-[0.78rem] font-semibold text-emerald-300">
+                  <p className="flex items-center gap-2 text-[0.78rem] font-semibold text-emerald-400">
                     <IconCheck className="h-4 w-4" /> Sale closed · no human involved
                   </p>
                   <p className="font-display text-[0.9rem] font-bold text-zinc-100">+$425.00</p>
@@ -125,10 +125,10 @@ export default function Automation() {
             whileInView={{ opacity: 1, y: 0, rotate: 3 }}
             viewport={{ once: true }}
             transition={{ delay: 0.35, duration: 0.8, ease: EASE as unknown as number[] }}
-            className="glass absolute -right-4 top-12 hidden w-48 rounded-xl p-4 shadow-2xl sm:block animate-float-slow"
+            className="glass absolute -right-4 top-12 hidden w-48 rounded-xl border border-char-700/60 p-4 shadow-xl sm:block animate-float-slow"
             style={{ "--tilt": "3deg" } as React.CSSProperties}
           >
-            <p className="flex items-center gap-1.5 text-[0.66rem] font-bold uppercase tracking-wider text-amber-300">
+            <p className="flex items-center gap-1.5 text-[0.66rem] font-bold uppercase tracking-wider text-violet-400">
               <IconBolt className="h-3.5 w-3.5" /> This week
             </p>
             <p className="font-display mt-2 text-2xl font-bold text-zinc-50">1,284</p>
@@ -150,8 +150,8 @@ export default function Automation() {
           <div className="mt-9 space-y-4">
             {POINTS.map((p, i) => (
               <Reveal key={p} delay={0.08 * i}>
-                <div className="group flex items-start gap-3.5 rounded-xl border border-transparent p-3.5 transition-all duration-300 hover:border-white/[0.08] hover:bg-white/[0.03]">
-                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-amber-400/12 text-amber-300 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-(--zy-amber-ink)">
+                <div className="group flex items-start gap-3.5 rounded-xl border border-transparent p-3.5 transition-all duration-300 hover:border-char-700 hover:bg-char-800/40">
+                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-violet-500/15 text-violet-400 transition-all duration-300 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white">
                     <IconCheck className="h-3.5 w-3.5" />
                   </span>
                   <p className="text-[1rem] leading-relaxed text-zinc-300">{p}</p>
@@ -170,7 +170,7 @@ export default function Automation() {
                 <IconSpark className="h-4 w-4 transition-transform duration-300 group-hover:rotate-90" />
               </a>
               <p className="text-[0.85rem] text-zinc-500">
-                Teams save <span className="font-bold text-amber-300">10+ hours every week</span>
+                Teams save <span className="font-bold text-violet-400">10+ hours every week</span>
               </p>
             </div>
           </Reveal>

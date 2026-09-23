@@ -23,7 +23,7 @@ const STEPS = [
 ];
 
 const inputCls =
-  "w-full rounded-xl border border-white/10 bg-char-950/[0.35] px-4 py-3 text-[0.95rem] text-zinc-100 placeholder:text-zinc-600 transition-all duration-300 focus:border-amber-400/60 focus:bg-char-950/[0.5] hover:border-white/20";
+  "w-full rounded-xl border border-char-700 bg-char-950/70 px-4 py-3 text-[0.95rem] text-zinc-100 placeholder:text-zinc-600 transition-all duration-300 focus:border-violet-500/60 focus:bg-char-950 hover:border-char-600";
 
 function Field({ label, optional, children }: { label: string; optional?: boolean; children: React.ReactNode }) {
   return (
@@ -63,18 +63,19 @@ export default function Contact() {
 
   return (
     <div className="relative overflow-hidden">
-      <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(70%_55%_at_50%_15%,black,transparent)]" />
-      <div className="absolute -top-32 left-1/2 h-[420px] w-[760px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.13),transparent)] blur-2xl" />
-      <div className="absolute -right-32 top-40 h-80 w-80 rounded-full bg-orange-500/[0.06] blur-3xl" />
+      <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(70%_55%_at_50%_15%,black,transparent)] pointer-events-none" />
+      <div className="absolute -top-32 left-1/2 h-[420px] w-[760px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(124,58,237,0.1),transparent)] blur-2xl pointer-events-none" />
+      <div className="absolute -right-32 top-40 h-80 w-80 rounded-full bg-violet-600/[0.04] blur-3xl pointer-events-none" />
       <Embers />
 
       <section className="relative pt-36 pb-24 sm:pt-44 sm:pb-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.3em] text-amber-300">
+              <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/25 bg-violet-500/10 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-violet-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
                 Book a free demo
-              </p>
+              </span>
             </Reveal>
             <motion.h1
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 30 }}
@@ -82,7 +83,7 @@ export default function Contact() {
               transition={{ duration: 0.9, delay: 0.1, ease: EASE as unknown as number[] }}
               className="font-display mt-5 text-balance text-5xl font-bold leading-[1.03] tracking-tight text-zinc-50 sm:text-6xl lg:text-7xl"
             >
-              See Zyntai <em className="font-accent font-normal italic text-amber-300">in action.</em>
+              See Zyntai <em className="font-accent font-normal italic text-violet-400">in action.</em>
             </motion.h1>
             <Reveal delay={0.2}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-400 sm:text-xl">
@@ -99,7 +100,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.9, ease: EASE as unknown as number[] }}
-              className="liquid-glass relative overflow-hidden rounded-[1.5rem] p-7 sm:p-10"
+              className="liquid-glass relative overflow-hidden rounded-[1.5rem] border border-char-700/60 p-7 sm:p-10 shadow-xl"
             >
               <AnimatePresence mode="wait">
                 {sent ? (
@@ -114,7 +115,7 @@ export default function Contact() {
                       initial={{ scale: 0, rotate: -30 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
-                      className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-orange-500 text-(--zy-amber-ink) shadow-[0_0_44px_rgba(245,158,11,0.45)]"
+                      className="grid h-16 w-16 place-items-center rounded-full bg-violet-600 text-white shadow-[0_0_36px_rgba(124,58,237,0.35)]"
                     >
                       <IconCheck className="h-8 w-8" />
                     </motion.span>
@@ -123,12 +124,12 @@ export default function Contact() {
                     </h2>
                     <p className="mt-3 max-w-sm text-[0.98rem] leading-relaxed text-zinc-400">
                       We'll be in touch within 24 hours at{" "}
-                      <span className="font-semibold text-amber-300">{form.email}</span> to schedule
+                      <span className="font-semibold text-violet-400">{form.email}</span> to schedule
                       your demo.
                     </p>
                     <button
                       onClick={() => setSent(false)}
-                      className="link-underline mt-7 text-[0.88rem] font-semibold text-zinc-300 hover:text-amber-300"
+                      className="link-underline mt-7 text-[0.88rem] font-semibold text-zinc-300 hover:text-violet-400 cursor-pointer"
                     >
                       Send another message
                     </button>
@@ -174,7 +175,7 @@ export default function Contact() {
                       <motion.p
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="rounded-xl border border-orange-400/30 bg-orange-400/[0.07] px-4 py-2.5 text-[0.82rem] font-medium text-orange-300"
+                        className="rounded-xl border border-red-500/30 bg-red-500/[0.08] px-4 py-2.5 text-[0.82rem] font-medium text-red-400"
                       >
                         {error}
                       </motion.p>
@@ -195,7 +196,7 @@ export default function Contact() {
             {/* side panel */}
             <div className="flex flex-col gap-6">
               <Reveal delay={0.12} y={40}>
-                <div className="glass rounded-[1.5rem] p-7 sm:p-8">
+                <div className="glass rounded-[1.5rem] border border-char-700/60 p-7 sm:p-8">
                   <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.25em] text-zinc-500">
                     What happens next
                   </p>
@@ -203,11 +204,11 @@ export default function Contact() {
                     {STEPS.map((s, i) => (
                       <div key={s.title} className="group flex gap-4">
                         <div className="flex flex-col items-center">
-                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-amber-400/25 bg-amber-400/[0.08] text-amber-300 transition-transform duration-300 group-hover:scale-110">
+                          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-violet-500/25 bg-violet-500/10 text-violet-400 transition-transform duration-300 group-hover:scale-105">
                             <s.icon className="h-4.5 w-4.5" />
                           </span>
                           {i < STEPS.length - 1 && (
-                            <span className="mt-2 w-px flex-1 bg-gradient-to-b from-amber-400/40 to-transparent" />
+                            <span className="mt-2 w-px flex-1 bg-gradient-to-b from-violet-500/30 to-transparent" />
                           )}
                         </div>
                         <div className="pb-1">
@@ -217,20 +218,20 @@ export default function Contact() {
                       </div>
                     ))}
                   </div>
-                  <p className="mt-6 rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-center text-[0.85rem] font-semibold text-zinc-300">
-                    No credit card. <span className="text-amber-300">No pressure.</span>
+                  <p className="mt-6 rounded-xl border border-char-700/60 bg-char-800/40 px-4 py-3 text-center text-[0.85rem] font-semibold text-zinc-300">
+                    No credit card. <span className="text-violet-400">No pressure.</span>
                   </p>
                 </div>
               </Reveal>
 
               <Reveal delay={0.2} y={40}>
-                <div className="glass rounded-[1.5rem] p-7 sm:p-8">
+                <div className="glass rounded-[1.5rem] border border-char-700/60 p-7 sm:p-8">
                   <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.25em] text-zinc-500">
                     Prefer email?
                   </p>
                   <a
                     href="mailto:hello@zyntai.app"
-                    className="link-underline mt-3 inline-block font-display text-xl font-bold text-amber-300"
+                    className="link-underline mt-3 inline-block font-display text-xl font-bold text-violet-400"
                   >
                     hello@zyntai.app
                   </a>
@@ -246,7 +247,7 @@ export default function Contact() {
                         target="_blank"
                         rel="noreferrer"
                         aria-label={s.label}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-zinc-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-400/40 hover:text-amber-300"
+                        className="grid h-10 w-10 place-items-center rounded-full border border-char-700 bg-char-800/50 text-zinc-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-500/40 hover:text-violet-400"
                       >
                         <s.icon className="h-4.5 w-4.5" />
                       </a>

@@ -45,25 +45,26 @@ function Intro({ done }: { done: boolean }) {
         initial={{ scale: 0.6, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6, ease: EASE as unknown as number[] }}
-        className="grid h-16 w-16 place-items-center rounded-[1.3rem] bg-gradient-to-br from-amber-300 to-orange-500 shadow-[0_0_60px_rgba(245,158,11,0.4)]"
+        className="relative grid h-16 w-16 place-items-center rounded-[1.2rem] bg-[#09090B] border border-[#27272A] shadow-[0_4px_24px_rgba(124,58,237,0.25)]"
       >
-        <svg viewBox="0 0 32 32" className="h-9 w-9 text-(--zy-amber-ink)" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 32 32" className="h-9 w-9 text-white" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
           <path d="M8 8h16L8 24h16" />
         </svg>
+        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-[#8B5CF6] ring-2 ring-[#09090B]" />
       </motion.div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25, duration: 0.5 }}
-        className="font-display mt-5 text-xl font-bold tracking-tight text-zinc-50"
+        className="font-display mt-5 text-xl font-bold tracking-tight text-[#FAFAFA]"
       >
-        Zyntai<span className="text-amber-400">.</span>
+        Zyntai<span className="text-[#8B5CF6]">.</span>
       </motion.p>
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.3, duration: 0.7, ease: EASE as unknown as number[] }}
-        className="mt-4 h-px w-24 origin-left bg-gradient-to-r from-amber-400 to-transparent"
+        className="mt-4 h-px w-24 origin-left bg-gradient-to-r from-[#8B5CF6] to-transparent"
       />
     </motion.div>
   );

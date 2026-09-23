@@ -42,10 +42,10 @@ function MobileCta() {
           >
             <Link
               to="/signup"
-              className="liquid-glass flex items-center gap-2.5 rounded-full py-3 pl-5 pr-3 font-semibold text-amber-300 ring-1 ring-amber-400/25"
+              className="liquid-glass flex items-center gap-2.5 rounded-full py-3 pl-5 pr-3 font-semibold text-violet-400 ring-1 ring-violet-500/30"
             >
               Start free trial
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-b from-amber-300 to-amber-500 text-(--zy-amber-ink)">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-violet-600 text-white">
                 <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14m0 0-6-6m6 6-6 6" />
                 </svg>

@@ -22,22 +22,22 @@ function StepCard({ s, i }: { s: (typeof STEPS)[number]; i: number }) {
         style={{
           zIndex: i + 1,
         }}
-        className="group surface-solid relative overflow-hidden rounded-[1.25rem] p-8 transition-[border-color,box-shadow] duration-300 hover:border-amber-400/40 hover:shadow-[0_30px_90px_-30px_rgba(245,158,11,0.4)] lg:sticky lg:top-[26vh] sm:p-10"
+        className="group surface-solid relative overflow-hidden rounded-[1.25rem] border border-char-700/60 p-8 transition-all duration-300 hover:border-violet-500/40 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] lg:sticky lg:top-[26vh] sm:p-10"
       >
         <span
           aria-hidden
-          className="font-accent pointer-events-none absolute -top-8 right-5 select-none text-[8rem] italic leading-none text-amber-400/[0.09] transition-colors duration-700 group-hover:text-amber-400/[0.16]"
+          className="font-accent pointer-events-none absolute -top-8 right-5 select-none text-[8rem] italic leading-none text-violet-500/[0.08] transition-colors duration-500 group-hover:text-violet-500/[0.14]"
         >
           {s.n}
         </span>
-        <div className="pointer-events-none absolute -left-20 -top-20 h-48 w-48 rounded-full bg-amber-400/[0.07] opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute -left-20 -top-20 h-48 w-48 rounded-full bg-violet-500/[0.05] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="relative flex items-center gap-4">
-          <span className="grid h-13 w-13 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-amber-300 to-orange-500 p-3.5 text-(--zy-amber-ink) shadow-[0_0_28px_rgba(245,158,11,0.35)] transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+          <span className="grid h-13 w-13 shrink-0 place-items-center rounded-xl border border-violet-500/30 bg-char-900 p-3.5 text-violet-400 shadow-sm transition-transform duration-300 group-hover:scale-105">
             <Icon className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.28em] text-amber-300/80">
+            <p className="text-[0.66rem] font-bold uppercase tracking-[0.28em] text-violet-400">
               Step {s.n}
             </p>
             <h3 className="font-display mt-1 text-2xl font-bold tracking-tight text-zinc-50 sm:text-[1.65rem]">
@@ -51,11 +51,11 @@ function StepCard({ s, i }: { s: (typeof STEPS)[number]; i: number }) {
         </p>
 
         <div className="relative mt-7 flex items-center justify-between gap-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/[0.06] px-4 py-2 font-mono text-[0.76rem] font-medium tracking-wide text-amber-200">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" />
+          <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/25 bg-violet-500/10 px-4 py-2 font-mono text-[0.76rem] font-medium tracking-wide text-violet-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
             {s.chip}
           </span>
-          <span className="hidden h-px flex-1 bg-gradient-to-r from-white/12 to-transparent sm:block" />
+          <span className="hidden h-px flex-1 bg-gradient-to-r from-char-700/60 to-transparent sm:block" />
         </div>
 
       </div>
@@ -87,22 +87,22 @@ export default function HowItWorks() {
 
   return (
     <section id="how" className="relative overflow-hidden py-28 sm:py-36">
-      <div className="absolute inset-0 grid-lines opacity-50 [mask-image:radial-gradient(65%_55%_at_60%_45%,black,transparent)]" />
-      <div className="absolute -right-24 top-1/4 h-96 w-96 rounded-full bg-orange-500/[0.08] blur-3xl" />
+      <div className="absolute inset-0 grid-lines opacity-50 [mask-image:radial-gradient(65%_55%_at_60%_45%,black,transparent)] pointer-events-none" />
+      <div className="absolute -right-24 top-1/4 h-96 w-96 rounded-full bg-violet-600/[0.04] blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           {/* sticky rail column */}
           <div className="lg:sticky lg:top-28 lg:self-start">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-400/[0.08] px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-amber-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/25 bg-violet-500/10 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-violet-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
                 How it works
               </span>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="font-display mt-6 text-balance text-4xl font-bold leading-[1.04] tracking-tight text-zinc-50 sm:text-5xl lg:text-[3.3rem]">
-                Live before your <em className="font-accent font-normal italic text-amber-300">next</em> launch.
+                Live before your <em className="font-accent font-normal italic text-violet-400">next</em> launch.
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
@@ -114,36 +114,36 @@ export default function HowItWorks() {
 
             {/* progress rail (desktop) */}
             <div className="relative mt-12 hidden lg:block">
-              <div className="absolute bottom-2 left-[1.35rem] top-2 w-px bg-white/[0.1]" />
+              <div className="absolute bottom-2 left-[1.35rem] top-2 w-px bg-char-700/60" />
               <motion.div
                 style={{ scaleY: reduce ? 1 : fill, transformOrigin: "top" }}
-                className="absolute bottom-2 left-[1.35rem] top-2 w-px bg-gradient-to-b from-amber-300 to-orange-500 shadow-[0_0_12px_rgba(245,158,11,0.7)]"
+                className="absolute bottom-2 left-[1.35rem] top-2 w-px bg-gradient-to-b from-violet-500 to-violet-600"
               />
               <div className="space-y-9">
                 {STEP_SHORT.map((label, i) => (
                   <motion.button
                     key={label}
                     onClick={() => jumpTo(i)}
-                    className="relative flex w-full items-center gap-5 text-left"
+                    className="relative flex w-full items-center gap-5 text-left cursor-pointer"
                     animate={{ x: active === i ? 6 : 0 }}
                     transition={{ duration: 0.4, ease: EASE_SWING as unknown as number[] }}
                   >
                     <span
-                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border font-display text-[0.8rem] font-bold transition-all duration-500 ${
+                      className={`grid h-11 w-11 shrink-0 place-items-center rounded-full border font-display text-[0.8rem] font-bold transition-all duration-300 ${
                         active === i
-                          ? "border-amber-400/60 bg-amber-400/15 text-amber-300 shadow-[0_0_24px_rgba(245,158,11,0.4)]"
-                          : "border-white/10 bg-char-950 text-zinc-600"
+                          ? "border-violet-500 bg-violet-500/15 text-violet-400 shadow-[0_0_16px_rgba(124,58,237,0.3)]"
+                          : "border-char-700 bg-char-950 text-zinc-500"
                       }`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`font-display text-lg font-semibold transition-colors duration-500 ${
-                        active === i ? "text-zinc-50" : "text-zinc-600"
+                      className={`font-display text-lg font-semibold transition-colors duration-300 ${
+                        active === i ? "text-zinc-50" : "text-zinc-500"
                       }`}
                     >
                       {label}
-                      <span className="ml-3 text-[0.78rem] font-normal text-zinc-600">
+                      <span className="ml-3 text-[0.78rem] font-normal text-zinc-500">
                         {STEP_TAIL[i]}
                       </span>
                     </span>
@@ -173,10 +173,10 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="glass rounded-[1.25rem] border-dashed p-7 text-center sm:p-8"
+              className="glass rounded-[1.25rem] border border-dashed border-char-700/80 p-7 text-center sm:p-8"
             >
               <p className="font-display text-lg font-semibold text-zinc-100">
-                That's the whole onboarding. <span className="font-accent italic text-amber-300">Really.</span>
+                That's the whole onboarding. <span className="font-accent italic text-violet-400">Really.</span>
               </p>
               <p className="mt-2 text-[0.9rem] text-zinc-500">
                 Most teams take their first Zyntai order within 15 minutes of signing up.

@@ -38,7 +38,7 @@ Built with **React 18**, **TypeScript**, **Tailwind CSS v4**, **Framer Motion**,
 | **Order Processing** | Delayed batch emails & scattered spreadsheets | **Zero-Latency Real-Time Command Terminal** with live status telemetry |
 | **Workflow Automation** | Complex external Zapier setups with API fragility | **Built-in Visual Node-Based Trigger & Dispatch Automation Engine** |
 | **User Experience** | Cookie-cutter templates & sluggish scrolling | **60 FPS Lenis Inertial Motion, Ambient Shader Canvases & Ember Physics** |
-| **Theming & Identity** | Rigid single-mode designs | **Dual Ink-Inversion Architecture** (Sacred Amber accent preserved 100%) |
+| **Theming & Identity** | Rigid single-mode designs | **Dual System Theme Architecture** (Clean Black / Charcoal canvas + Violet accent system) |
 
 ---
 
@@ -111,33 +111,33 @@ graph TD
 
 ---
 
-## 🎨 Artisan Design System
+## 🎨 Enterprise SaaS Design System
 
-Zyntai's visual architecture follows strict mathematical principles detailed in [`DESIGN.md`](./DESIGN.md):
+Zyntai's visual architecture follows strict modern SaaS principles detailed in [`DESIGN.md`](./DESIGN.md):
 
 ```
-Layer Hierarchy:
+Visual Architecture:
 ┌─────────────────────────────────────────────────────────┐
-│ 5. Forefront Interactive Modals, Tooltips & Drawers      │
+│ 5. Forefront Interactive Modals, Drawers & Portals      │
 ├─────────────────────────────────────────────────────────┤
-│ 4. Glassmorphic Surface Cards (18px backdrop-blur)      │
+│ 4. Structured Surface Cards (High-contrast 1px border)  │
 ├─────────────────────────────────────────────────────────┤
-│ 3. Ambient Embers & Particle Physics Engine             │
+│ 3. Ambient Violet Embers & Particle Physics             │
 ├─────────────────────────────────────────────────────────┤
-│ 2. Fluid Canvas WebGL/GLSL Shader Ambient Mesh          │
+│ 2. Fluid Canvas WebGL/GLSL Subtle Violet Shader Mesh    │
 ├─────────────────────────────────────────────────────────┤
-│ 1. Sub-pixel Architectural Grid & Base Canvas Glows     │
+│ 1. Sub-pixel Charcoal/Black Architecture Base Grid      │
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Color Tokens & Inversion Logic
-* **The Sacred Amber Accent (`#FCD34D` / `#FBBF24` / `#F59E0B`)**: 100% byte-identical across both Light and Dark modes. Amber is reserved exclusively for high-intent conversion actions, live badges, and signature focal points.
-* **Dual-Mode Harmony**:
-  * **Dark Canvas**: Deep volcanic black (`#0B0A09`), charcoal card base (`#121010`), and pure white typography (`#FAFAFA`).
-  * **Light Canvas**: Pristine cloud canvas (`#F8F9FB`), frosted crystalline card base (`#FDFDFE`), and rich carbon ink (`#0F1115`).
+### Color Tokens & System Foundations
+* **Charcoal / Black Canvas (`#09090B`, `#111113`, `#18181B`, `#27272A`)**: High-contrast, clean foundation for dashboards and cards.
+* **The Violet Accent (`#7C3AED` / `#8B5CF6` / `#A78BFA`)**: Used exclusively for high-intent conversion actions, active navigation, links, and signature focal points.
+* **Light Mode Canvas (`#FFFFFF`, `#FAFAFA`, `#F8F7FC`)**: Clean enterprise document contrast with crisp zinc text and subtle 1px hairlines (`#E4E4E7`).
 * **Kinetic Polish**:
   * Curves: Custom bezier `cubic-bezier(0.22, 1, 0.36, 1)` for silky deceleration.
   * Motion Respect: Automatically collapses ambient animations when `prefers-reduced-motion` is detected in user system settings.
+
 
 ---
 

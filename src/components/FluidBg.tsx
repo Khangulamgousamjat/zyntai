@@ -43,14 +43,13 @@ void main(){
     fbm(p * 1.35 + 3.2 * q + vec2(8.3, 2.8) - 0.24 * t));
   float f = fbm(p * 1.35 + 2.7 * r);
   float ink = smoothstep(0.42, 0.96, f);
-  float streak = smoothstep(0.52, 0.9, fbm(p * 3.1 - r + t));
-  vec3 amber = vec3(0.98, 0.66, 0.12);
-  vec3 ember = vec3(0.88, 0.3, 0.06);
-  vec3 col = mix(amber, ember, clamp(q.x * 0.5 + 0.5, 0.0, 1.0));
+  vec3 violet1 = vec3(0.486, 0.227, 0.929);
+  vec3 violet2 = vec3(0.545, 0.361, 0.965);
+  vec3 col = mix(violet1, violet2, clamp(q.x * 0.5 + 0.5, 0.0, 1.0));
   vec2 c = uv - 0.5;
   float vig = smoothstep(0.9, 0.18, length(c));
-  float alpha = (ink * 0.42 + streak * 0.1) * vig;
-  gl_FragColor = vec4(col * alpha * 1.2, alpha * 0.5);
+  float alpha = (ink * 0.22 + streak * 0.06) * vig;
+  gl_FragColor = vec4(col * alpha * 0.95, alpha * 0.3);
 }
 `;
 
@@ -179,7 +178,7 @@ export default function FluidBg({ className = "" }: { className?: string }) {
       ref={ref}
       aria-hidden
       className={`pointer-events-none absolute inset-0 h-full w-full ${
-        light ? "opacity-40" : "opacity-65"
+        light ? "opacity-20" : "opacity-35"
       } ${className}`}
     />
   );

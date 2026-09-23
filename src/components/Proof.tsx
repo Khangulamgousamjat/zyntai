@@ -58,7 +58,7 @@ export default function Proof() {
             {doubled.map((l, i) => (
               <div
                 key={`${l.name}-${i}`}
-                className="group flex cursor-default items-center gap-2.5 text-zinc-600 transition-all duration-500 hover:scale-[1.04] hover:text-amber-300"
+                className="group flex cursor-default items-center gap-2.5 text-zinc-600 transition-all duration-500 hover:scale-[1.04] hover:text-violet-400"
               >
                 <LogoMark i={i} />
                 <Wordmark name={l.name} style={l.style} />
@@ -73,22 +73,22 @@ export default function Proof() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.9, ease: EASE as unknown as number[] }}
-          className="glass mt-14 grid grid-cols-2 overflow-hidden rounded-[1.6rem] lg:grid-cols-4"
+          className="glass mt-14 grid grid-cols-2 overflow-hidden rounded-[1.6rem] border border-char-700/60 lg:grid-cols-4"
         >
           {STATS.map((s, i) => (
             <div
               key={s.label}
-              className={`group relative px-6 py-8 text-center transition-colors duration-500 hover:bg-amber-400/[0.04] sm:px-8 ${
-                i !== 0 ? "border-l border-white/[0.06] max-lg:[&:nth-child(3)]:border-l-0" : ""
-              } ${i >= 2 ? "max-lg:border-t max-lg:border-white/[0.06]" : ""}`}
+              className={`group relative px-6 py-8 text-center transition-colors duration-500 hover:bg-violet-500/[0.04] sm:px-8 ${
+                i !== 0 ? "border-l border-char-700/60 max-lg:[&:nth-child(3)]:border-l-0" : ""
+              } ${i >= 2 ? "max-lg:border-t max-lg:border-char-700/60" : ""}`}
             >
-              <p className="font-display text-4xl font-bold tracking-tight text-zinc-50 transition-colors duration-500 group-hover:text-amber-300 sm:text-[2.75rem]">
+              <p className="font-display text-4xl font-bold tracking-tight text-zinc-50 transition-colors duration-500 group-hover:text-violet-400 sm:text-[2.75rem]">
                 <Counter to={s.value} decimals={s.decimals} suffix={s.suffix} />
               </p>
               <p className="mt-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-zinc-500">
                 {s.label}
               </p>
-              <span className="pointer-events-none absolute inset-x-8 bottom-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-amber-400 to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-x-8 bottom-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-violet-500 to-transparent transition-transform duration-500 group-hover:scale-x-100" />
             </div>
           ))}
         </motion.div>

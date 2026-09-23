@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent, type MouseEvent as ReactMo
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE, Reveal } from "../lib/motion";
-import { Logo, IconArrow, IconCheck, IconBird, IconInstagram, IconLinkedIn, IconSpark } from "../lib/icons";
+import { Logo, IconArrow, IconCheck, IconBird, IconInstagram, IconLinkedIn } from "../lib/icons";
 import { useGotoLanding } from "./Layout";
 
 /* ---------------- final CTA ---------------- */
@@ -11,41 +11,38 @@ export function FinalCta() {
   return (
     <section id="cta" className="relative px-5 py-14 sm:px-8 sm:py-20">
       <motion.div
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 56, scale: 0.97 }}
+        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.98 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 1, ease: EASE as unknown as number[] }}
-        className="grain relative mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 px-6 py-20 text-center shadow-[0_40px_140px_-30px_rgba(245,158,11,0.55)] sm:px-16 sm:py-24"
+        transition={{ duration: 0.8, ease: EASE as unknown as number[] }}
+        className="relative mx-auto max-w-6xl overflow-hidden rounded-[1.5rem] border border-char-700/80 bg-char-900/90 px-6 py-20 text-center shadow-2xl sm:px-16 sm:py-24"
       >
-        {/* decorative rings & sparks */}
-        <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full border-[22px] border-white/15" />
-        <div className="pointer-events-none absolute -bottom-28 -right-16 h-80 w-80 rounded-full border-[28px] border-char-950/[0.07]" />
-        <IconSpark className="pointer-events-none absolute left-[12%] top-10 h-8 w-8 animate-spin-slow text-(--zy-amber-ink)/25" />
-        <IconSpark className="pointer-events-none absolute bottom-12 right-[14%] h-6 w-6 animate-spin-slow text-white/40" style={{ animationDirection: "reverse" }} />
+        {/* subtle violet ambient glow */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.14),transparent_65%)]" />
 
         <Reveal>
-          <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.3em] text-(--zy-amber-ink)/60">
+          <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.3em] text-violet-400">
             Your next quarter could be different
           </p>
         </Reveal>
         <Reveal delay={0.08}>
-          <h2 className="font-display mx-auto mt-5 max-w-3xl text-balance text-4xl font-bold leading-[1.04] tracking-tight text-(--zy-amber-ink) sm:text-6xl">
-            Ready to grow your <em className="font-accent font-normal italic">business?</em>
+          <h2 className="font-display relative mx-auto mt-5 max-w-3xl text-balance text-4xl font-bold leading-[1.04] tracking-tight text-zinc-50 sm:text-6xl">
+            Ready to grow your <em className="font-accent font-normal italic text-violet-400">business?</em>
           </h2>
         </Reveal>
         <Reveal delay={0.16}>
-          <p className="mx-auto mt-6 max-w-xl text-lg font-medium leading-relaxed text-(--zy-amber-ink)/75">
+          <p className="relative mx-auto mt-6 max-w-xl text-lg font-normal leading-relaxed text-zinc-400">
             Join 12,000+ businesses taking more orders with less chaos. Set up tonight, sell smarter
             tomorrow.
           </p>
         </Reveal>
         <Reveal delay={0.24}>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link to="/signup" className="btn btn-dark group px-8 py-4 text-[1rem]">
+          <div className="relative mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link to="/signup" className="btn btn-primary group px-8 py-4 text-[1rem]">
               Get started now
               <IconArrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
-            <p className="text-[0.82rem] font-semibold text-(--zy-amber-ink)/60">Start free. No credit card. Cancel anytime.</p>
+            <p className="text-[0.82rem] font-medium text-zinc-500">Start free. No credit card. Cancel anytime.</p>
           </div>
         </Reveal>
       </motion.div>
@@ -89,7 +86,7 @@ export function Footer() {
   const gotoLanding = useGotoLanding();
 
   const linkProps = (href: string) => {
-    if (href.startsWith("/") || href.startsWith("mailto:")) return null; // handled separately
+    if (href.startsWith("/") || href.startsWith("mailto:")) return null;
     return {
       href,
       onClick: (e: ReactMouseEvent) => {
@@ -118,7 +115,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="liquid-glass relative border-t">
+    <footer className="liquid-glass relative border-t border-char-700/60">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.4fr]">
           <div>
@@ -147,7 +144,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.label}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-zinc-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-400/40 hover:text-amber-300"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-char-700 bg-char-800/50 text-zinc-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-500/40 hover:text-violet-400"
                 >
                   <s.icon className="h-4.5 w-4.5" />
                 </a>
@@ -163,7 +160,7 @@ export function Footer() {
               <ul className="mt-5 space-y-3">
                 {col.links.map((l) => {
                   const cls =
-                    "link-underline text-[0.92rem] text-zinc-500 transition-colors hover:text-amber-300";
+                    "link-underline text-[0.92rem] text-zinc-500 transition-colors hover:text-violet-400";
                   return (
                     <li key={l.label}>
                       {l.href.startsWith("/") ? (
@@ -193,7 +190,7 @@ export function Footer() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 flex items-center gap-2.5 rounded-full border border-emerald-400/30 bg-emerald-400/[0.08] px-4 py-3 text-[0.88rem] font-semibold text-emerald-300"
+                className="mt-4 flex items-center gap-2.5 rounded-full border border-emerald-400/30 bg-emerald-400/[0.08] px-4 py-3 text-[0.88rem] font-semibold text-emerald-400"
               >
                 <IconCheck className="h-4 w-4" /> You're on the list — see you Friday.
               </motion.div>
@@ -205,12 +202,12 @@ export function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@yourcompany.com"
-                  className="w-full min-w-0 rounded-full border border-white/10 bg-char-950/70 px-4 py-2.5 text-[0.88rem] text-zinc-200 placeholder:text-zinc-600 transition-colors focus:border-amber-400/50"
+                  className="w-full min-w-0 rounded-full border border-char-700 bg-char-950/70 px-4 py-2.5 text-[0.88rem] text-zinc-200 placeholder:text-zinc-600 transition-colors focus:border-violet-500/50"
                 />
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="grid h-10 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-b from-amber-300 to-amber-500 text-(--zy-amber-ink) transition-all hover:brightness-110 active:scale-90"
+                  className="grid h-10 w-11 shrink-0 place-items-center rounded-full bg-violet-600 text-white transition-all hover:bg-violet-700 active:scale-90"
                 >
                   <IconArrow className="h-4 w-4 rotate-45" />
                 </button>
@@ -219,7 +216,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-white/[0.06] pt-8 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-char-700/60 pt-8 sm:flex-row">
           <p className="text-[0.82rem] text-zinc-600">© 2026 Zyntai. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {LEGAL.map((l) =>
@@ -227,7 +224,7 @@ export function Footer() {
                 <Link
                   key={l.label}
                   to={l.href}
-                  className="link-underline text-[0.82rem] text-zinc-600 transition-colors hover:text-amber-300"
+                  className="link-underline text-[0.82rem] text-zinc-600 transition-colors hover:text-violet-400"
                 >
                   {l.label}
                 </Link>
@@ -235,7 +232,7 @@ export function Footer() {
                 <button
                   key={l.label}
                   onClick={() => showToast(`${l.label} ships with your contract — ping legal@zyntai.app anytime.`)}
-                  className="link-underline text-[0.82rem] text-zinc-600 transition-colors hover:text-amber-300"
+                  className="link-underline text-[0.82rem] text-zinc-600 transition-colors hover:text-violet-400 cursor-pointer"
                 >
                   {l.label}
                 </button>
@@ -248,9 +245,9 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="mt-8 flex items-center justify-center border-t border-white/[0.04] pt-6 pb-2">
-          <p className="text-[0.82rem] font-medium tracking-wide text-zinc-500 transition-colors hover:text-amber-300">
-            Craft with <span className="font-semibold text-amber-300">gous khan</span>
+        <div className="mt-8 flex items-center justify-center border-t border-char-700/40 pt-6 pb-2">
+          <p className="text-[0.82rem] font-medium tracking-wide text-zinc-500 transition-colors hover:text-violet-400">
+            Craft with <span className="font-semibold text-violet-400">gous khan</span>
           </p>
         </div>
       </div>
@@ -263,7 +260,7 @@ export function Footer() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.35, ease: EASE as unknown as number[] }}
-            className="glass fixed bottom-6 left-1/2 z-[95] w-max max-w-[92vw] -translate-x-1/2 rounded-full px-5 py-3 text-[0.88rem] font-medium text-zinc-200 shadow-2xl"
+            className="glass fixed bottom-6 left-1/2 z-[95] w-max max-w-[92vw] -translate-x-1/2 rounded-full border border-char-700 px-5 py-3 text-[0.88rem] font-medium text-zinc-200 shadow-2xl"
           >
             {toast}
           </motion.div>

@@ -39,7 +39,7 @@ function MaskedWord({ children, accent = false }: { children: string; accent?: b
       <motion.span
         variants={word}
         className={`inline-block will-change-transform ${
-          accent ? "font-accent italic font-normal text-amber-300 text-[1.06em]" : ""
+          accent ? "font-accent italic font-normal text-violet-400 text-[1.06em]" : ""
         }`}
       >
         {children}
@@ -56,9 +56,9 @@ const HEADLINE: { t: string; accent?: boolean; br?: boolean }[] = [
 ];
 
 const STATUS_STYLE: Record<string, string> = {
-  New: "bg-amber-400/15 text-amber-300 border-amber-400/30",
-  Processing: "bg-orange-500/10 text-orange-300 border-orange-400/25",
-  Paid: "bg-emerald-400/10 text-emerald-300 border-emerald-400/25",
+  New: "bg-violet-500/15 text-violet-400 border-violet-500/30",
+  Processing: "bg-zinc-700/25 text-zinc-300 border-zinc-700/40",
+  Paid: "bg-emerald-400/10 text-emerald-400 border-emerald-400/25",
 };
 
 function DashboardMockup() {
@@ -94,37 +94,37 @@ function DashboardMockup() {
       className="relative mx-auto w-full max-w-5xl"
     >
       {/* glow behind */}
-      <div className="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_35%,rgba(245,158,11,0.18),transparent_70%)] blur-2xl" />
+      <div className="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_35%,rgba(124,58,237,0.12),transparent_70%)] blur-2xl" />
 
-      <div className="glass relative overflow-hidden rounded-[1.25rem] shadow-[0_40px_120px_-24px_rgba(15,17,21,0.45)]">
+      <div className="glass relative overflow-hidden rounded-[1.25rem] shadow-[0_40px_120px_-24px_rgba(0,0,0,0.6)]">
         {/* chrome bar */}
-        <div className="flex items-center gap-3 border-b border-white/[0.06] bg-white/[0.03] px-4 py-3">
+        <div className="flex items-center gap-3 border-b border-char-700/60 bg-white/[0.02] px-4 py-3">
           <div className="flex gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           </div>
-          <div className="mx-auto flex items-center gap-2 rounded-full border border-white/[0.07] bg-char-950/70 px-4 py-1 text-[0.72rem] text-zinc-500">
+          <div className="mx-auto flex items-center gap-2 rounded-full border border-char-700 bg-char-950/70 px-4 py-1 text-[0.72rem] text-zinc-500">
             <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="5" y="10" width="14" height="10" rx="2" />
               <path d="M8 10V7a4 4 0 0 1 8 0v3" />
             </svg>
             app.zyntai.com/orders
           </div>
-          <span className="flex items-center gap-1.5 rounded-full border border-amber-400/25 bg-amber-400/10 px-2.5 py-1 text-[0.68rem] font-semibold text-amber-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" />
+          <span className="flex items-center gap-1.5 rounded-full border border-violet-500/25 bg-violet-500/10 px-2.5 py-1 text-[0.68rem] font-semibold text-violet-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
             LIVE
           </span>
         </div>
 
         <div className="grid grid-cols-[auto_1fr]">
           {/* sidebar */}
-          <div className="hidden w-14 flex-col items-center gap-5 border-r border-white/[0.06] py-5 sm:flex">
+          <div className="hidden w-14 flex-col items-center gap-5 border-r border-char-700/60 py-5 sm:flex">
             {["grid", "menu", "chat", "chart", "gear"].map((k, i) => (
               <span
                 key={k}
                 className={`grid h-9 w-9 place-items-center rounded-xl ${
-                  i === 0 ? "bg-amber-400/15 text-amber-300" : "text-zinc-600"
+                  i === 0 ? "bg-violet-500/15 text-violet-400" : "text-zinc-600"
                 }`}
               >
                 {k === "grid" && (
@@ -167,13 +167,13 @@ function DashboardMockup() {
                 <p className="font-display text-sm font-semibold text-zinc-100">Nova Studio — live orders</p>
                 <p className="text-[0.72rem] text-zinc-500">Dashboard · updated just now</p>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/[0.03] px-3 py-1.5">
-                <IconSound className="h-3.5 w-3.5 text-amber-300" />
+              <div className="flex items-center gap-2 rounded-full border border-char-700 bg-char-800/80 px-3 py-1.5">
+                <IconSound className="h-3.5 w-3.5 text-violet-400" />
                 <span className="flex h-3.5 items-end gap-[3px]">
                   {[0.9, 0.5, 1, 0.65, 0.8].map((d, i) => (
                     <span
                       key={i}
-                      className="eq-bar w-[3px] rounded-full bg-amber-400"
+                      className="eq-bar w-[3px] rounded-full bg-violet-400"
                       style={{ height: "100%", animationDelay: `${i * 0.12}s`, animationDuration: `${d}s` }}
                     />
                   ))}
@@ -192,15 +192,15 @@ function DashboardMockup() {
               ].map((k) => (
                 <div
                   key={k.label}
-                  className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-4 py-3.5 transition-colors hover:border-amber-400/25"
+                  className="rounded-xl border border-char-700/60 bg-char-800/50 px-4 py-3.5 transition-colors hover:border-violet-500/30"
                 >
                   <p className="text-[0.68rem] uppercase tracking-wider text-zinc-500">{k.label}</p>
                   <div className="mt-1 flex items-baseline gap-2">
                     <span className="font-display text-lg font-bold text-zinc-50 sm:text-xl">{k.val}</span>
-                    <span className={`text-[0.66rem] font-semibold ${k.delta.startsWith("−") ? "text-emerald-300" : "text-amber-300"}`}>
+                    <span className="text-[0.66rem] font-semibold text-emerald-400">
                       {k.delta}
                     </span>
-                    {k.live && <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" />}
+                    {k.live && <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />}
                   </div>
                 </div>
               ))}
@@ -208,10 +208,10 @@ function DashboardMockup() {
 
             <div className="grid gap-4 lg:grid-cols-[1.15fr_1fr]">
               {/* chart */}
-              <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] p-4">
+              <div className="rounded-xl border border-char-700/60 bg-char-800/50 p-4">
                 <div className="mb-4 flex items-center justify-between">
                   <p className="font-display text-[0.8rem] font-semibold text-zinc-200">Revenue · last 14 days</p>
-                  <span className="rounded-full bg-amber-400/10 px-2 py-0.5 text-[0.64rem] font-semibold text-amber-300">
+                  <span className="rounded-full bg-violet-500/10 px-2 py-0.5 text-[0.64rem] font-semibold text-violet-400">
                     Peak: Sat $2.4k
                   </span>
                 </div>
@@ -226,8 +226,8 @@ function DashboardMockup() {
                       style={{ height: `${h}%`, transformOrigin: "bottom" }}
                       className={`group relative flex-1 rounded-t-md ${
                         i === bars.length - 1
-                          ? "bg-gradient-to-t from-orange-500 to-amber-300 shadow-[0_0_18px_rgba(251,191,36,0.45)]"
-                          : "bg-gradient-to-t from-amber-500/25 to-amber-400/70 group-hover:to-amber-300"
+                          ? "bg-gradient-to-t from-violet-600 to-violet-400 shadow-[0_0_14px_rgba(139,92,246,0.35)]"
+                          : "bg-gradient-to-t from-violet-900/30 to-violet-500/50 group-hover:to-violet-400"
                       } transition-colors`}
                     >
                       <span className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 rounded bg-char-950 px-1.5 py-0.5 text-[0.58rem] text-zinc-400 opacity-0 transition-opacity group-hover:opacity-100">
@@ -239,10 +239,10 @@ function DashboardMockup() {
               </div>
 
               {/* live feed */}
-              <div className="flex flex-col rounded-xl border border-white/[0.06] bg-white/[0.025] p-4">
+              <div className="flex flex-col rounded-xl border border-char-700/60 bg-char-800/50 p-4">
                 <div className="mb-3 flex items-center justify-between">
                   <p className="font-display text-[0.8rem] font-semibold text-zinc-200">Incoming orders</p>
-                  <span className="flex items-center gap-1.5 text-[0.66rem] font-medium text-emerald-300">
+                  <span className="flex items-center gap-1.5 text-[0.66rem] font-medium text-emerald-400">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-dot" />
                     streaming
                   </span>
@@ -257,9 +257,9 @@ function DashboardMockup() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.45, ease: EASE as unknown as number[] }}
-                        className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-char-950/60 px-3 py-2.5"
+                        className="flex items-center gap-3 rounded-xl border border-char-700/60 bg-char-950/70 px-3 py-2.5"
                       >
-                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-amber-400/12 text-amber-300">
+                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-violet-500/15 text-violet-400">
                           <IconBell className="h-4 w-4" />
                         </span>
                         <div className="min-w-0 flex-1">
@@ -301,7 +301,7 @@ function FloatChips() {
         className="glass absolute -left-8 top-16 z-10 hidden items-center gap-2.5 rounded-xl px-4 py-3 shadow-xl md:flex animate-float-slow"
         style={{ "--tilt": "-3deg" } as React.CSSProperties}
       >
-        <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber-400/15 text-amber-300">
+        <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-500/15 text-violet-400">
           <IconBell className="h-4.5 w-4.5" />
         </span>
         <div>
@@ -318,7 +318,7 @@ function FloatChips() {
         className="glass absolute -right-6 top-1/3 z-10 hidden items-center gap-2 rounded-xl px-4 py-3 shadow-xl lg:flex animate-float-slower"
         style={{ "--tilt": "2.5deg" } as React.CSSProperties}
       >
-        <IconUpsell className="h-4.5 w-4.5 text-amber-300" />
+        <IconUpsell className="h-4.5 w-4.5 text-violet-400" />
         <div>
           <p className="text-[0.74rem] font-semibold text-zinc-100">+24% order value</p>
           <p className="text-[0.66rem] text-zinc-500">smart upsells this week</p>
@@ -333,7 +333,7 @@ function FloatChips() {
         className="glass absolute -bottom-6 left-14 z-10 hidden items-center gap-2.5 rounded-xl px-4 py-3 shadow-xl lg:flex animate-float-slow"
         style={{ "--tilt": "1.5deg", animationDelay: "1.2s" } as React.CSSProperties}
       >
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-400/15 text-emerald-300">
+        <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-400/15 text-emerald-400">
           <IconCheck className="h-4 w-4" />
         </span>
         <p className="text-[0.74rem] font-semibold text-zinc-100">
@@ -351,13 +351,13 @@ function RotatingBadge() {
         <defs>
           <path id="circ" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
         </defs>
-        <circle cx="50" cy="50" r="49" className="fill-char-900/80 stroke-white/10" />
-        <text className="fill-amber-300/90 text-[8.2px] font-semibold uppercase tracking-[0.32em]">
+        <circle cx="50" cy="50" r="49" className="fill-char-900/80 stroke-char-700" />
+        <text className="fill-violet-400/90 text-[8.2px] font-semibold uppercase tracking-[0.32em]">
           <textPath href="#circ">zyntai · customer os · since 2024 ·</textPath>
         </text>
       </svg>
       <span className="absolute inset-0 grid place-items-center">
-        <IconBolt className="h-6 w-6 text-amber-400" />
+        <IconBolt className="h-6 w-6 text-violet-400" />
       </span>
     </div>
   );
@@ -433,21 +433,21 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.96 }}
             transition={{ duration: 0.5, ease: EASE as unknown as number[] }}
             onClick={(e) => e.stopPropagation()}
-            className="glass relative w-full max-w-lg overflow-hidden rounded-[1.25rem] p-7 shadow-2xl sm:p-9"
+            className="glass relative w-full max-w-lg overflow-hidden rounded-[1.25rem] border border-char-700 p-7 shadow-2xl sm:p-9"
           >
             <button
               onClick={onClose}
               aria-label="Close demo"
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-white/10 text-zinc-400 transition-colors hover:border-amber-400/40 hover:text-amber-300"
+              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-char-700 text-zinc-400 transition-colors hover:border-violet-500/50 hover:text-violet-400"
             >
               <IconX className="h-4 w-4" />
             </button>
 
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-amber-300">
+            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-violet-400">
               60-second tour · {slide + 1}/{SLIDES.length}
             </p>
 
-            <div className="mt-5 grid h-40 place-items-center rounded-xl border border-white/[0.07] bg-char-950/60">
+            <div className="mt-5 grid h-40 place-items-center rounded-xl border border-char-700 bg-char-950/70">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={slide}
@@ -457,7 +457,7 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
                   transition={{ duration: 0.4 }}
                   className="flex flex-col items-center gap-3"
                 >
-                  <span className="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-amber-300 to-orange-500 text-(--zy-amber-ink) shadow-[0_0_36px_rgba(245,158,11,0.4)]">
+                  <span className="grid h-14 w-14 place-items-center rounded-xl bg-char-900 border border-violet-500/30 text-violet-400 shadow-[0_0_28px_rgba(124,58,237,0.25)]">
                     <s.icon className="h-7 w-7" />
                   </span>
                   {s.visual === "track" && (
@@ -466,7 +466,7 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
                         <span
                           key={t}
                           className={`rounded-full border px-2.5 py-1 text-[0.62rem] font-semibold ${
-                            i === 1 ? "border-amber-400/40 bg-amber-400/10 text-amber-300" : "border-white/10 text-zinc-500"
+                            i === 1 ? "border-violet-500/40 bg-violet-500/10 text-violet-400" : "border-char-700 text-zinc-500"
                           }`}
                         >
                           {t}
@@ -483,7 +483,7 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
                           animate={{ scaleY: 1 }}
                           transition={{ delay: 0.1 * i, duration: 0.5 }}
                           style={{ height: h, transformOrigin: "bottom" }}
-                          className="w-4 rounded-t bg-gradient-to-t from-orange-500 to-amber-300"
+                          className="w-4 rounded-t bg-gradient-to-t from-violet-700 to-violet-400"
                         />
                       ))}
                     </div>
@@ -491,14 +491,14 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
                   {s.visual === "bell" && (
                     <span className="flex h-6 items-end gap-1">
                       {[0, 1, 2, 3, 4, 5].map((i) => (
-                        <span key={i} className="eq-bar w-1.5 rounded-full bg-amber-400" style={{ height: "100%", animationDelay: `${i * 0.1}s` }} />
+                        <span key={i} className="eq-bar w-1.5 rounded-full bg-violet-400" style={{ height: "100%", animationDelay: `${i * 0.1}s` }} />
                       ))}
                     </span>
                   )}
                   {s.visual === "menu" && (
                     <div className="flex gap-2">
                       {["Plans", "Add-ons", "Services"].map((t, i) => (
-                        <span key={t} className={`rounded-full border px-3 py-1 text-[0.64rem] font-semibold ${i === 0 ? "border-amber-400/40 bg-amber-400/10 text-amber-300" : "border-white/10 text-zinc-500"}`}>
+                        <span key={t} className={`rounded-full border px-3 py-1 text-[0.64rem] font-semibold ${i === 0 ? "border-violet-500/40 bg-violet-500/10 text-violet-400" : "border-char-700 text-zinc-500"}`}>
                           {t}
                         </span>
                       ))}
@@ -528,8 +528,8 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
                     key={i}
                     aria-label={`Go to slide ${i + 1}`}
                     onClick={() => setSlide(i)}
-                    className={`h-1.5 rounded-full transition-all duration-400 ${
-                      i === slide ? "w-8 bg-amber-400" : "w-3 bg-white/15 hover:bg-white/30"
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === slide ? "w-8 bg-violet-500" : "w-3 bg-zinc-700 hover:bg-zinc-600"
                     }`}
                   />
                 ))}
@@ -555,11 +555,11 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
       {/* layered backdrop */}
       <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(75%_65%_at_50%_30%,black,transparent)]" />
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.16),transparent)] blur-xl" />
-        <div className="absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-orange-400/[0.08] blur-2xl" />
-        <div className="absolute -right-32 top-16 h-80 w-80 rounded-full bg-amber-500/[0.08] blur-2xl" />
+        <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(124,58,237,0.12),transparent)] blur-xl" />
+        <div className="absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-violet-600/[0.04] blur-2xl" />
+        <div className="absolute -right-32 top-16 h-80 w-80 rounded-full bg-violet-700/[0.04] blur-2xl" />
       </div>
-      <FluidBg className="opacity-60" />
+      <FluidBg className="opacity-40" />
       <Embers />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -568,10 +568,10 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
             initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE as unknown as number[] }}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2 pr-4 backdrop-blur-md"
+            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-char-700 bg-char-900/60 py-1.5 pl-2 pr-4 backdrop-blur-md"
           >
-            <span className="flex items-center gap-1.5 rounded-full bg-amber-400/15 px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-amber-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" /> Live
+            <span className="flex items-center gap-1.5 rounded-full bg-violet-500/15 px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-violet-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" /> Live
             </span>
             <span className="text-[0.82rem] text-zinc-400">
               Now powering <span className="font-semibold text-zinc-200">12,000+ businesses</span>
@@ -611,13 +611,13 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
           >
             <Magnetic>
               <Link to="/signup" className="btn btn-primary group relative overflow-hidden px-7 py-3.5 text-[0.98rem]">
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                 Start free trial
                 <IconArrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </Magnetic>
             <button onClick={() => setDemoOpen(true)} className="btn btn-ghost group px-6 py-3.5 text-[0.98rem] font-semibold">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-amber-400/15 text-amber-300 transition-transform duration-300 group-hover:scale-110">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-violet-500/15 text-violet-400 transition-transform duration-300 group-hover:scale-110">
                 <IconPlay className="h-3.5 w-3.5 translate-x-[1px]" />
               </span>
               Watch 60s demo
@@ -634,14 +634,14 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
               {["ML", "DR", "AO", "JK"].map((ini, i) => (
                 <span
                   key={ini}
-                  className={`grid h-9 w-9 place-items-center rounded-full border-2 border-char-950 text-[0.62rem] font-bold text-(--zy-amber-ink) ${
-                    ["bg-amber-300", "bg-orange-400", "bg-amber-200", "bg-orange-300"][i]
+                  className={`grid h-9 w-9 place-items-center rounded-full border-2 border-char-950 text-[0.62rem] font-bold text-white ${
+                    ["bg-violet-600", "bg-zinc-700", "bg-violet-700", "bg-zinc-800"][i]
                   }`}
                 >
                   {ini}
                 </span>
               ))}
-              <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-char-950 bg-char-800 text-[0.6rem] font-bold text-amber-300">
+              <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-char-950 bg-char-800 text-[0.6rem] font-bold text-violet-400">
                 12k+
               </span>
             </div>
@@ -653,7 +653,7 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
                 <span className="ml-1.5 text-[0.8rem] font-semibold text-zinc-200">4.9/5</span>
               </div>
               <p className="mt-0.5 text-[0.8rem] text-zinc-500">
-                Trusted by <span className="font-semibold text-amber-300/90">12,000+ businesses</span> · no credit card required
+                Trusted by <span className="font-semibold text-violet-400">12,000+ businesses</span> · no credit card required
               </p>
             </div>
           </motion.div>

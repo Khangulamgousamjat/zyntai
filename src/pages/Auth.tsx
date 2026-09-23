@@ -28,7 +28,7 @@ function FloatingPaths({ position }: { position: number }) {
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <svg className="h-full w-full text-amber-500" viewBox="0 0 696 316" fill="none" preserveAspectRatio="xMidYMid slice">
+      <svg className="h-full w-full text-violet-600/30" viewBox="0 0 696 316" fill="none" preserveAspectRatio="xMidYMid slice">
         <title>Flowing light paths</title>
         {paths.map((p) => (
           <motion.path
@@ -42,7 +42,7 @@ function FloatingPaths({ position }: { position: number }) {
                 ? {}
                 : {
                     pathLength: 1,
-                    opacity: [0.2, 0.5, 0.2],
+                    opacity: [0.15, 0.45, 0.15],
                     pathOffset: [0, 1, 0],
                   }
             }
@@ -102,7 +102,7 @@ const EyeIcon = ({ off }: { off?: boolean }) => (
 );
 
 const inputCls =
-  "w-full rounded-xl border border-white/10 bg-char-950/[0.35] py-3.5 pl-4 pr-11 text-[0.95rem] text-zinc-100 placeholder:text-zinc-600 transition-all duration-300 hover:border-white/20 focus:border-amber-400/60 focus:bg-char-950/[0.5]";
+  "w-full rounded-xl border border-char-700 bg-char-950/70 py-3.5 pl-4 pr-11 text-[0.95rem] text-zinc-100 placeholder:text-zinc-600 transition-all duration-300 hover:border-char-600 focus:border-violet-500/60 focus:bg-char-950";
 
 const field = {
   hidden: { opacity: 0, y: 14 },
@@ -156,12 +156,12 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
   return (
     <main className="relative grid h-[100svh] min-h-[100svh] overflow-hidden lg:grid-cols-2">
       {/* ---------- left: paths + quote ---------- */}
-      <div className="relative hidden overflow-hidden border-r border-white/[0.06] bg-char-900/40 lg:flex lg:flex-col lg:p-8 xl:p-10">
+      <div className="relative hidden overflow-hidden border-r border-char-700/60 bg-char-900/40 lg:flex lg:flex-col lg:p-8 xl:p-10">
         <div className="absolute inset-0">
           <FloatingPaths position={1} />
           <FloatingPaths position={-1} />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-char-950 via-transparent to-char-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-char-950 via-transparent to-char-950/40 pointer-events-none" />
 
         <Link to="/" className="relative z-10 w-fit transition-opacity hover:opacity-80">
           <Logo />
@@ -187,7 +187,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
               </motion.p>
             </AnimatePresence>
             <footer className="mt-6 flex items-center gap-3.5">
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-orange-500 text-[0.78rem] font-bold text-(--zy-amber-ink) shadow-[0_0_26px_rgba(245,158,11,0.4)]">
+              <span className="grid h-11 w-11 place-items-center rounded-full bg-violet-600 text-[0.78rem] font-bold text-white shadow-sm">
                 RH
               </span>
               <div>
@@ -208,14 +208,14 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
 
       {/* ---------- right: form ---------- */}
       <div className="relative flex h-[100svh] min-h-0 flex-col justify-center p-4 sm:p-6 lg:p-8">
-        <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(70%_60%_at_50%_40%,black,transparent)]" />
-        <div className="absolute -right-24 top-10 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.14),transparent)] blur-2xl" />
-        <div className="absolute -left-24 bottom-10 h-80 w-80 rounded-full bg-orange-500/[0.07] blur-3xl" />
+        <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(70%_60%_at_50%_40%,black,transparent)] pointer-events-none" />
+        <div className="absolute -right-24 top-10 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,rgba(124,58,237,0.1),transparent)] blur-2xl pointer-events-none" />
+        <div className="absolute -left-24 bottom-10 h-80 w-80 rounded-full bg-violet-600/[0.04] blur-3xl pointer-events-none" />
         <Embers />
 
         <Link
           to="/"
-          className="group absolute left-4 top-4 z-10 flex w-fit items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-[0.8rem] font-medium text-zinc-400 backdrop-blur-md transition-all hover:border-amber-400/40 hover:text-amber-300 sm:left-6 sm:top-6 lg:left-8 lg:top-7"
+          className="group absolute left-4 top-4 z-10 flex w-fit items-center gap-1.5 rounded-full border border-char-700 bg-char-900/80 px-3.5 py-1.5 text-[0.8rem] font-medium text-zinc-400 backdrop-blur-md transition-all hover:border-violet-500/40 hover:text-violet-400 sm:left-6 sm:top-6 lg:left-8 lg:top-7"
         >
           <IconArrow className="h-3.5 w-3.5 rotate-180 transition-transform group-hover:-translate-x-0.5" />
           Back home
@@ -227,17 +227,17 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
           </div>
 
           {/* segmented mode switch */}
-          <div className="glass relative mx-auto mb-5 grid w-fit grid-cols-2 rounded-full p-1.5">
+          <div className="glass relative mx-auto mb-5 grid w-fit grid-cols-2 rounded-full border border-char-700 p-1.5">
             <motion.span
               aria-hidden="true"
               animate={{ x: signup ? "100%" : 0 }}
               transition={{ type: "spring", stiffness: 380, damping: 32 }}
-              className="absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-full bg-gradient-to-b from-amber-300 to-amber-500"
+              className="absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-full bg-violet-600 shadow-sm"
             />
             <Link
               to="/login"
               className={`relative z-10 rounded-full px-7 py-2 text-[0.88rem] font-semibold transition-colors ${
-                !signup ? "text-(--zy-amber-ink)" : "text-zinc-400 hover:text-zinc-200"
+                !signup ? "text-white" : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               Log in
@@ -245,14 +245,14 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
             <Link
               to="/signup"
               className={`relative z-10 rounded-full px-7 py-2 text-[0.88rem] font-semibold transition-colors ${
-                signup ? "text-(--zy-amber-ink)" : "text-zinc-400 hover:text-zinc-200"
+                signup ? "text-white" : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               Sign up
             </Link>
           </div>
 
-          <div className="liquid-glass mx-auto w-[84%] max-w-[24rem] rounded-[1.35rem] p-5 sm:p-6">
+          <div className="liquid-glass mx-auto w-[84%] max-w-[24rem] rounded-[1.35rem] border border-char-700/60 p-5 sm:p-6 shadow-xl">
             <AnimatePresence mode="wait">
               {done ? (
                 <motion.div
@@ -266,7 +266,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                     initial={{ scale: 0, rotate: -40 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.08 }}
-                    className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-orange-500 text-(--zy-amber-ink) shadow-[0_0_44px_rgba(245,158,11,0.45)]"
+                    className="grid h-16 w-16 place-items-center rounded-full bg-violet-600 text-white shadow-[0_0_36px_rgba(124,58,237,0.35)]"
                   >
                     <IconCheck className="h-8 w-8" />
                   </motion.span>
@@ -293,9 +293,9 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                 >
                   <h1 className="font-display text-[1.9rem] font-bold tracking-tight text-zinc-50 sm:text-[2.1rem]">
                     {signup ? (
-                      <>Create your <em className="font-accent font-normal italic text-amber-300">account.</em></>
+                      <>Create your <em className="font-accent font-normal italic text-violet-400">account.</em></>
                     ) : (
-                      <>Welcome <em className="font-accent font-normal italic text-amber-300">back.</em></>
+                      <>Welcome <em className="font-accent font-normal italic text-violet-400">back.</em></>
                     )}
                   </h1>
                   <p className="mt-2 text-[0.95rem] text-zinc-400">
@@ -309,16 +309,16 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                     onClick={() => setDone(true)}
                     whileHover={reduce ? undefined : { scale: 1.015 }}
                     whileTap={reduce ? undefined : { scale: 0.985 }}
-                    className="mt-5 flex w-full items-center justify-center gap-2.5 rounded-xl border border-white/12 bg-white/[0.06] py-3 text-[0.95rem] font-semibold text-zinc-100 backdrop-blur-md transition-colors hover:border-amber-400/40 hover:bg-white/[0.1]"
+                    className="mt-5 flex w-full items-center justify-center gap-2.5 rounded-xl border border-char-700 bg-char-800/60 py-3 text-[0.95rem] font-semibold text-zinc-100 backdrop-blur-md transition-colors hover:border-violet-500/40 hover:bg-char-800 cursor-pointer"
                   >
                     <GoogleIcon className="h-4.5 w-4.5" />
                     Continue with Google
                   </motion.button>
 
                   <div className="my-4 flex items-center gap-3">
-                    <span className="h-px flex-1 bg-white/[0.08]" />
-                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-zinc-600">or with email</span>
-                    <span className="h-px flex-1 bg-white/[0.08]" />
+                    <span className="h-px flex-1 bg-char-700/60" />
+                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-zinc-500">or with email</span>
+                    <span className="h-px flex-1 bg-char-700/60" />
                   </div>
 
                   <form onSubmit={submit} className="space-y-3" noValidate>
@@ -374,7 +374,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                         type="button"
                         aria-label={showPw ? "Hide password" : "Show password"}
                         onClick={() => setShowPw((v) => !v)}
-                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-amber-300"
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-violet-400 cursor-pointer"
                       >
                         <EyeIcon off={showPw} />
                       </button>
@@ -387,19 +387,19 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                           role="checkbox"
                           aria-checked={agree}
                           onClick={() => setAgree((v) => !v)}
-                          className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border transition-all duration-300 ${
+                          className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border transition-all duration-300 cursor-pointer ${
                             agree
-                              ? "border-amber-400 bg-gradient-to-b from-amber-300 to-amber-500 text-(--zy-amber-ink)"
-                              : "border-white/15 bg-transparent"
+                              ? "border-violet-600 bg-violet-600 text-white"
+                              : "border-char-700 bg-transparent"
                           }`}
                         >
                           {agree && <IconCheck className="h-3 w-3" />}
                         </button>
                         <span onClick={() => setAgree((v) => !v)}>
                           I agree to the{" "}
-                          <Link to="/terms" className="font-semibold text-amber-300 underline-offset-4 hover:underline">Terms of Service</Link>{" "}
+                          <Link to="/terms" className="font-semibold text-violet-400 underline-offset-4 hover:underline">Terms of Service</Link>{" "}
                           and{" "}
-                          <Link to="/privacy" className="font-semibold text-amber-300 underline-offset-4 hover:underline">Privacy Policy</Link>.
+                          <Link to="/privacy" className="font-semibold text-violet-400 underline-offset-4 hover:underline">Privacy Policy</Link>.
                         </span>
                       </label>
                     )}
@@ -409,7 +409,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                         <button
                           type="button"
                           onClick={() => setError("Password reset ships with the product — email hello@zyntai.app for now.")}
-                          className="link-underline text-[0.84rem] font-medium text-zinc-400 hover:text-amber-300"
+                          className="link-underline text-[0.84rem] font-medium text-zinc-400 hover:text-violet-400 cursor-pointer"
                         >
                           Forgot password?
                         </button>
@@ -420,7 +420,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                       <motion.p
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="rounded-xl border border-orange-400/30 bg-orange-400/[0.07] px-4 py-2.5 text-[0.82rem] font-medium text-orange-300"
+                        className="rounded-xl border border-red-500/30 bg-red-500/[0.08] px-4 py-2.5 text-[0.82rem] font-medium text-red-400"
                       >
                         {error}
                       </motion.p>
@@ -436,7 +436,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
                     {signup ? "Already have an account?" : "Don't have an account?"}{" "}
                     <Link
                       to={signup ? "/login" : "/signup"}
-                      className="font-semibold text-amber-300 underline-offset-4 hover:underline"
+                      className="font-semibold text-violet-400 underline-offset-4 hover:underline"
                     >
                       {signup ? "Log in" : "Sign up"}
                     </Link>
@@ -450,7 +450,7 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
             {QUOTES.map((quote, index) => (
               <span
                 key={quote}
-                className={`h-1 rounded-full transition-all duration-500 ${index === quoteIndex ? "w-6 bg-amber-300" : "w-1.5 bg-white/20"}`}
+                className={`h-1 rounded-full transition-all duration-300 ${index === quoteIndex ? "w-6 bg-violet-400" : "w-1.5 bg-zinc-700"}`}
               />
             ))}
           </div>
@@ -458,8 +458,8 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
           <p className="mt-4 text-center text-[0.72rem] text-zinc-600">
             Protected by 256-bit encryption · SOC 2 in progress
           </p>
-          <p className="mt-2 text-center text-[0.78rem] font-medium text-zinc-500 transition-colors hover:text-amber-300">
-            Craft with <span className="font-semibold text-amber-300">gous khan</span>
+          <p className="mt-2 text-center text-[0.78rem] font-medium text-zinc-500 transition-colors hover:text-violet-400">
+            Craft with <span className="font-semibold text-violet-400">gous khan</span>
           </p>
         </div>
       </div>

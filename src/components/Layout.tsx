@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Nav from "./Nav";
 import { Footer } from "./Closing";
 
-/* soft amber light that trails the cursor (fine pointers only) */
+/* soft violet light that trails the cursor (fine pointers only) */
 export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -60,7 +60,7 @@ export function CursorGlow() {
       className="cursor-glow pointer-events-none fixed left-0 top-0 z-[1] h-[520px] w-[520px] rounded-full opacity-60 will-change-transform"
       style={{
         background:
-          "radial-gradient(closest-side, rgba(245,158,11,0.08), rgba(245,158,11,0.02) 55%, transparent 70%)",
+          "radial-gradient(closest-side, rgba(124,58,237,0.08), rgba(124,58,237,0.02) 55%, transparent 70%)",
       }}
     />
   );
@@ -86,7 +86,7 @@ export function BackToTop() {
     <button
       aria-label="Back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-6 right-6 z-[60] hidden h-12 w-12 place-items-center rounded-full border border-amber-400/25 bg-char-900/80 text-amber-300 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-amber-400/50 sm:grid ${
+      className={`fixed bottom-6 right-6 z-[60] hidden h-12 w-12 place-items-center rounded-full border border-char-700 bg-char-900/90 text-violet-400 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-violet-500/50 hover:text-violet-300 cursor-pointer sm:grid ${
         show ? "opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >

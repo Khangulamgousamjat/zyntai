@@ -162,16 +162,16 @@ export function SectionHeading({
     <div className={`max-w-3xl ${centered ? "mx-auto text-center" : ""}`}>
       <Reveal>
         <span
-          className={`inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/[0.07] px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-amber-300`}
+          className={`inline-flex items-center gap-2 rounded-full border border-violet-500/25 bg-violet-500/10 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-violet-400`}
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" />
+          <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
           {eyebrow}
         </span>
       </Reveal>
       <Reveal delay={0.08}>
         <h2 className="font-display mt-6 text-balance text-4xl font-bold leading-[1.04] tracking-tight text-zinc-50 sm:text-5xl lg:text-[3.4rem]">
           {title}{" "}
-          {accent && <em className="font-accent font-normal italic text-amber-300">{accent}</em>}
+          {accent && <em className="font-accent font-normal italic text-violet-400">{accent}</em>}
           {tail && <> {tail}</>}
         </h2>
       </Reveal>

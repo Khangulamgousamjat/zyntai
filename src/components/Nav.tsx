@@ -18,7 +18,7 @@ function ThemeToggle({ compact = false }: { compact?: boolean }) {
       onClick={toggle}
       aria-label={light ? "Switch to dark mode" : "Switch to light mode"}
       title={light ? "Switch to dark mode" : "Switch to light mode"}
-      className={`relative grid place-items-center overflow-hidden rounded-full border border-white/10 bg-white/[0.04] text-zinc-200 transition-all duration-300 hover:border-amber-400/40 hover:text-amber-300 active:scale-90 ${
+      className={`relative grid place-items-center overflow-hidden rounded-full border border-char-700 bg-char-800/80 text-zinc-300 transition-all duration-300 hover:border-violet-500/50 hover:text-violet-400 active:scale-90 ${
         compact ? "h-11 w-11" : "h-10 w-10"
       }`}
     >
@@ -110,7 +110,7 @@ export default function Nav() {
       {/* progress bar */}
       <motion.div
         style={{ scaleX: progress }}
-        className="pointer-events-none absolute left-0 top-0 z-[2] h-[3px] w-full origin-left bg-gradient-to-r from-amber-500 via-orange-400 to-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.75)]"
+        className="pointer-events-none absolute left-0 top-0 z-[2] h-[2px] w-full origin-left bg-gradient-to-r from-violet-600 via-violet-500 to-violet-400"
       />
 
       {/* announcement strip */}
@@ -120,18 +120,18 @@ export default function Nav() {
             initial={false}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="overflow-hidden border-b border-white/[0.05] bg-char-900/80 backdrop-blur-md"
+            className="overflow-hidden border-b border-char-700/60 bg-char-900/80 backdrop-blur-md"
           >
             <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-[0.78rem] text-zinc-400">
-              <IconBolt className="h-3.5 w-3.5 text-amber-400" />
+              <IconBolt className="h-3.5 w-3.5 text-violet-500" />
               <span>
-                <span className="font-semibold text-amber-300">Zyntai 2.0</span> is live — AI
+                <span className="font-semibold text-violet-400">Zyntai 2.0</span> is live — AI
                 assistant, smart workflows & advanced analytics.
               </span>
               <a
                 href="#features"
                 onClick={handleAnchor("#features")}
-                className="link-underline hidden font-medium text-zinc-200 sm:inline"
+                className="link-underline hidden font-medium text-zinc-200 hover:text-violet-400 sm:inline"
               >
                 See what's new
               </a>
@@ -156,8 +156,8 @@ export default function Nav() {
           <ul className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((l) => {
               const route = routeFor(l.href);
-              const cls = `link-underline text-[0.92rem] font-medium transition-colors duration-300 ${
-                isActive(l.href) ? "text-amber-300" : "text-zinc-400 hover:text-zinc-100"
+              const cls = `link-underline text-[0.92rem] font-medium transition-colors duration-200 ${
+                isActive(l.href) ? "text-violet-500 font-semibold" : "text-zinc-400 hover:text-zinc-100"
               }`;
               return (
                 <li key={l.href}>
@@ -179,7 +179,7 @@ export default function Nav() {
             <ThemeToggle />
             <Link
               to="/login"
-              className="rounded-full px-4.5 py-2 text-[0.92rem] font-medium text-zinc-300 transition-colors hover:text-amber-300"
+              className="rounded-full px-4.5 py-2 text-[0.92rem] font-medium text-zinc-300 transition-colors hover:text-violet-400"
             >
               Log in
             </Link>
@@ -187,7 +187,7 @@ export default function Nav() {
               to="/signup"
               className="btn btn-primary group relative overflow-hidden px-5 py-2.5 text-[0.92rem]"
             >
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               Start free
             </Link>
           </div>
@@ -197,7 +197,7 @@ export default function Nav() {
             <button
               aria-label="Toggle menu"
               onClick={() => setOpen((v) => !v)}
-              className="grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-200"
+              className="grid h-11 w-11 place-items-center rounded-xl border border-char-700 bg-char-800 text-zinc-200"
             >
               {open ? (
                 <IconX className="h-5 w-5" />
@@ -219,7 +219,7 @@ export default function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -14 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="nav-glass mx-4 mt-2 overflow-hidden rounded-2xl lg:hidden"
+            className="nav-glass mx-4 mt-2 overflow-hidden rounded-2xl border border-char-700 lg:hidden"
           >
             <div className="flex flex-col p-3">
               {NAV_LINKS.map((l, i) => {
@@ -229,8 +229,8 @@ export default function Nav() {
                 );
                 const cls = `block rounded-xl px-4 py-3.5 transition-colors ${
                   isActive(l.href)
-                    ? "bg-amber-400/[0.08] text-amber-300"
-                    : "text-zinc-200 hover:bg-white/[0.05] hover:text-amber-300"
+                    ? "bg-violet-500/10 text-violet-400 font-semibold"
+                    : "text-zinc-200 hover:bg-white/[0.05] hover:text-violet-400"
                 }`;
                 return route ? (
                   <motion.div
@@ -257,11 +257,11 @@ export default function Nav() {
                   </motion.a>
                 );
               })}
-              <div className="mt-2 grid grid-cols-2 gap-2 border-t border-white/[0.06] p-3">
+              <div className="mt-2 grid grid-cols-2 gap-2 border-t border-char-700 p-3">
                 <Link
                   to="/login"
                   onClick={() => setOpen(false)}
-                  className="rounded-xl border border-white/10 py-3 text-center font-medium text-zinc-200"
+                  className="rounded-xl border border-char-700 py-3 text-center font-medium text-zinc-200 hover:text-violet-400"
                 >
                   Log in
                 </Link>

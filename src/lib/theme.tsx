@@ -11,7 +11,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
       const saved = localStorage.getItem("zyntai-theme");
-      return saved === "light" || saved === "dark" ? saved : "light";
+      if (saved === "light" || saved === "dark") return saved;
+      if (typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        return "light";
+      }
+      return "dark";
     } catch {
       return "dark";
     }
@@ -19,6 +23,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.classList.toggle("light", theme === "light");
+    document.documentElement.classList.toggle("dark", theme === "dark");
     try {
       localStorage.setItem("zyntai-theme", theme);
     } catch {

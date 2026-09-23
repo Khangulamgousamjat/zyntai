@@ -36,19 +36,19 @@ export default function Embers({ className = "" }: { className?: string }) {
       canvas.width = w * DPR;
       canvas.height = h * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      const count = Math.min(42, Math.floor(w / 32));
+      const count = Math.min(24, Math.floor(w / 50));
       embers = Array.from({ length: count }, () => spawn(true));
     };
 
     const spawn = (anywhere: boolean): Ember => ({
       x: Math.random() * (w || 800),
       y: anywhere ? Math.random() * (h || 600) : (h || 600) + 12,
-      r: 0.8 + Math.random() * 2.1,
-      vy: 0.25 + Math.random() * 0.65,
-      vx: -0.15 + Math.random() * 0.3,
-      a: 0.12 + Math.random() * 0.4,
+      r: 0.8 + Math.random() * 1.8,
+      vy: 0.18 + Math.random() * 0.45,
+      vx: -0.1 + Math.random() * 0.2,
+      a: 0.08 + Math.random() * 0.22,
       phase: Math.random() * Math.PI * 2,
-      hue: 32 + Math.random() * 16,
+      hue: 255 + Math.random() * 20,
     });
 
     let isVisible = true;

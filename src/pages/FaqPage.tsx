@@ -21,22 +21,22 @@ export default function FaqPage() {
   return (
     <section className="relative overflow-hidden pt-36 sm:pt-44">
       {/* backdrop */}
-      <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(70%_42%_at_50%_0%,black,transparent)]" />
-      <div className="absolute -top-32 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.12),transparent)] blur-2xl" />
-      <div className="absolute -right-32 top-64 h-80 w-80 rounded-full bg-amber-500/[0.06] blur-3xl" />
+      <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(70%_42%_at_50%_0%,black,transparent)] pointer-events-none" />
+      <div className="absolute -top-32 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(124,58,237,0.1),transparent)] blur-2xl pointer-events-none" />
+      <div className="absolute -right-32 top-64 h-80 w-80 rounded-full bg-violet-600/[0.04] blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         {/* header */}
         <div className="max-w-3xl">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/[0.07] px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-amber-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse-dot" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/25 bg-violet-500/10 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-violet-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
               Help center
             </span>
           </Reveal>
           <Reveal delay={0.08}>
             <h1 className="font-display mt-6 text-5xl font-bold leading-[1.03] tracking-tight text-zinc-50 sm:text-6xl lg:text-[4.2rem]">
-              Frequently asked <em className="font-accent font-normal italic text-amber-300">questions.</em>
+              Frequently asked <em className="font-accent font-normal italic text-violet-400">questions.</em>
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
@@ -59,16 +59,16 @@ export default function FaqPage() {
                   <button
                     key={g.group}
                     onClick={() => jump(`faq-group-${i}`)}
-                    className="group flex w-full items-center justify-between rounded-[1rem] border border-white/[0.06] bg-white/[0.025] px-5 py-4 text-left transition-all duration-300 hover:translate-x-1.5 hover:border-amber-400/30 hover:bg-amber-400/[0.05]"
+                    className="group flex w-full items-center justify-between rounded-[1rem] border border-char-700/60 bg-char-900/60 px-5 py-4 text-left transition-all duration-300 hover:translate-x-1 hover:border-violet-500/30 hover:bg-violet-500/[0.04] cursor-pointer"
                   >
-                    <span className="font-display text-[1.02rem] font-semibold text-zinc-200 transition-colors group-hover:text-amber-300">
+                    <span className="font-display text-[1.02rem] font-semibold text-zinc-200 transition-colors group-hover:text-violet-400">
                       {g.group}
                     </span>
                     <span className="flex items-center gap-3">
-                      <span className="rounded-full border border-white/[0.08] px-2.5 py-0.5 text-[0.68rem] font-bold text-zinc-500">
+                      <span className="rounded-full border border-char-700 bg-char-800/80 px-2.5 py-0.5 text-[0.68rem] font-bold text-zinc-400">
                         {g.items.length}
                       </span>
-                      <span className="text-zinc-600 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-amber-300">
+                      <span className="text-zinc-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-violet-400">
                         →
                       </span>
                     </span>
@@ -78,8 +78,8 @@ export default function FaqPage() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="glass relative mt-8 overflow-hidden rounded-[1.25rem] p-7">
-                <IconSpark className="absolute -right-4 -top-4 h-16 w-16 text-amber-400/10" />
+              <div className="glass relative mt-8 overflow-hidden rounded-[1.25rem] border border-char-700/60 p-7">
+                <IconSpark className="absolute -right-4 -top-4 h-16 w-16 text-violet-500/10 pointer-events-none" />
                 <p className="font-display text-xl font-bold text-zinc-50">Still stuck?</p>
                 <p className="mt-2 text-[0.92rem] leading-relaxed text-zinc-400">
                   Write to us — a human replies within one business day. No ticket numbers, no bots
@@ -91,7 +91,7 @@ export default function FaqPage() {
                   </a>
                   <button
                     onClick={() => gotoLanding("demo")}
-                    className="btn btn-ghost w-full py-3 text-[0.9rem]"
+                    className="btn btn-ghost w-full py-3 text-[0.9rem] cursor-pointer"
                   >
                     See the product live
                   </button>
@@ -106,7 +106,7 @@ export default function FaqPage() {
               <div key={g.group} id={`faq-group-${gi}`} className="scroll-mt-32">
                 <Reveal>
                   <div className="flex items-baseline gap-4">
-                    <span className="font-accent text-2xl italic text-amber-300/70">
+                    <span className="font-accent text-2xl italic text-violet-400/80">
                       {String(gi + 1).padStart(2, "0")}
                     </span>
                     <h2 className="font-display text-2xl font-bold tracking-tight text-zinc-50 sm:text-[1.7rem]">
@@ -134,22 +134,22 @@ export default function FaqPage() {
 
             {/* bottom CTA */}
             <Reveal>
-              <div className="grain relative overflow-hidden rounded-[1.9rem] bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 px-6 py-14 text-center shadow-[0_36px_110px_-28px_rgba(245,158,11,0.5)] sm:px-12">
-                <div className="pointer-events-none absolute -left-12 -bottom-12 h-44 w-44 rounded-full border-[16px] border-white/15" />
-                <h2 className="font-display text-3xl font-bold tracking-tight text-(--zy-amber-ink) sm:text-4xl">
-                  Still have <em className="font-accent font-normal italic">questions?</em>
+              <div className="relative overflow-hidden rounded-[1.5rem] border border-char-700 bg-char-900/90 px-6 py-14 text-center shadow-2xl sm:px-12">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.12),transparent_65%)]" />
+                <h2 className="font-display relative text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
+                  Still have <em className="font-accent font-normal italic text-violet-400">questions?</em>
                 </h2>
-                <p className="mx-auto mt-3 max-w-md text-[0.98rem] font-medium text-(--zy-amber-ink)/75">
+                <p className="relative mx-auto mt-3 max-w-md text-[0.98rem] font-normal text-zinc-400">
                   Skip the docs — ask us directly, or watch the 60-second tour.
                 </p>
-                <div className="mt-7 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
-                  <a href="mailto:hello@zyntai.app" className="btn btn-dark group px-7 py-3.5">
+                <div className="relative mt-7 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+                  <a href="mailto:hello@zyntai.app" className="btn btn-primary group px-7 py-3.5">
                     Talk to us
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </a>
                   <button
                     onClick={() => gotoLanding("demo")}
-                    className="btn border border-(--zy-amber-ink)/25 bg-(--zy-amber-ink)/10 px-7 py-3.5 text-(--zy-amber-ink) backdrop-blur-md hover:bg-(--zy-amber-ink)/20"
+                    className="btn btn-ghost px-7 py-3.5 text-zinc-200 cursor-pointer"
                   >
                     Watch the demo
                   </button>
