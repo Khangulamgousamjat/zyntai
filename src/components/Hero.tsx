@@ -35,7 +35,7 @@ function MaskedWord({ children, accent = false }: { children: string; accent?: b
         className={`inline-block will-change-transform ${
           accent
             ? "font-accent italic font-normal text-violet-600 dark:text-violet-400 text-[1.06em]"
-            : "text-zinc-950 dark:text-white"
+            : "text-headline-main font-bold"
         }`}
       >
         {children}
@@ -157,7 +157,7 @@ function HeroShowcase() {
           <div className="mt-3.5 space-y-2.5 text-[0.8rem] sm:text-[0.84rem]">
             {/* User message 1 */}
             <div className="flex justify-start">
-              <div className="max-w-[84%] rounded-2xl rounded-tl-xs bg-zinc-100 dark:bg-[#1E1E22] px-3.5 py-2.5 text-zinc-800 dark:text-zinc-200 leading-relaxed shadow-xs">
+              <div className="max-w-[84%] rounded-2xl rounded-tl-xs chat-user-bubble px-3.5 py-2.5 leading-relaxed shadow-xs">
                 Hi! I'm looking for a customized gift for my friend. Can you help?
               </div>
             </div>
@@ -180,7 +180,7 @@ function HeroShowcase() {
                     className={`rounded-full px-3 py-1 text-[0.72rem] font-medium transition-all ${
                       active
                         ? "border border-violet-500 bg-violet-50 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 font-semibold shadow-xs"
-                        : "border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-[#18181B] text-zinc-600 dark:text-zinc-400 hover:border-violet-400 hover:text-violet-600"
+                        : "border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-[#18181B] text-zinc-700 dark:text-zinc-300 hover:border-violet-400 hover:text-violet-600"
                     }`}
                   >
                     {opt}
@@ -191,7 +191,7 @@ function HeroShowcase() {
 
             {/* User message 2 */}
             <div className="flex justify-start">
-              <div className="max-w-[80%] rounded-2xl rounded-tl-xs bg-zinc-100 dark:bg-[#1E1E22] px-3.5 py-2 text-zinc-800 dark:text-zinc-200 leading-relaxed shadow-xs">
+              <div className="max-w-[80%] rounded-2xl rounded-tl-xs chat-user-bubble px-3.5 py-2 leading-relaxed shadow-xs">
                 A bracelet with her name.
               </div>
             </div>
@@ -214,7 +214,7 @@ function HeroShowcase() {
                   </svg>
                 </div>
                 <div className="mt-1 px-1">
-                  <p className="truncate text-[0.68rem] font-semibold text-zinc-900 dark:text-zinc-100">Name Cuff</p>
+                  <p className="truncate text-[0.68rem] font-semibold text-headline-main">Name Cuff</p>
                   <p className="text-[0.62rem] font-bold text-violet-600 dark:text-violet-400">₹1,499</p>
                 </div>
               </div>
@@ -228,7 +228,7 @@ function HeroShowcase() {
                   </svg>
                 </div>
                 <div className="mt-1 px-1">
-                  <p className="truncate text-[0.68rem] font-semibold text-zinc-900 dark:text-zinc-100">Coral Bead</p>
+                  <p className="truncate text-[0.68rem] font-semibold text-headline-main">Coral Bead</p>
                   <p className="text-[0.62rem] font-bold text-violet-600 dark:text-violet-400">₹899</p>
                 </div>
               </div>
@@ -242,7 +242,7 @@ function HeroShowcase() {
                   </svg>
                 </div>
                 <div className="mt-1 px-1">
-                  <p className="truncate text-[0.68rem] font-semibold text-zinc-900 dark:text-zinc-100">Heart Link</p>
+                  <p className="truncate text-[0.68rem] font-semibold text-headline-main">Heart Link</p>
                   <p className="text-[0.62rem] font-bold text-violet-600 dark:text-violet-400">₹1,299</p>
                 </div>
               </div>
@@ -250,7 +250,7 @@ function HeroShowcase() {
 
             {/* Input bar */}
             <div className="mt-3 flex items-center justify-between rounded-full border border-zinc-200 dark:border-zinc-700/80 bg-zinc-50 dark:bg-[#18181B] px-3.5 py-1.5 shadow-xs">
-              <span className="text-[0.76rem] text-zinc-400">Type a message...</span>
+              <span className="text-[0.76rem] text-body-muted">Type a message...</span>
               <button
                 aria-label="Send"
                 className="grid h-6 w-6 place-items-center rounded-full bg-violet-600 text-white shadow-xs transition-transform hover:scale-110 active:scale-95"
@@ -273,8 +273,8 @@ function HeroShowcase() {
             transition={{ delay: 0.6, duration: 0.7 }}
             className="absolute -top-3 -right-2 md:-right-6 lg:-right-8 xl:-right-10 z-20 w-44 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-[#111113]/95 p-3.5 shadow-xl backdrop-blur-md"
           >
-            <p className="text-[0.68rem] font-medium text-zinc-500 dark:text-zinc-400">Total Sales</p>
-            <p className="mt-0.5 text-[1.18rem] font-bold tracking-tight text-zinc-950 dark:text-white">₹ 2,48,900</p>
+            <p className="text-[0.68rem] font-medium text-body-muted">Total Sales</p>
+            <p className="mt-0.5 text-[1.18rem] font-bold tracking-tight text-headline-main">₹ 2,48,900</p>
             <div className="mt-2 flex items-end justify-between">
               <span className="flex items-center text-[0.72rem] font-semibold text-emerald-500">
                 ↑ 32%
@@ -307,8 +307,8 @@ function HeroShowcase() {
               </svg>
             </span>
             <div>
-              <p className="text-[0.84rem] font-bold text-zinc-950 dark:text-white leading-tight">12,000+</p>
-              <p className="text-[0.68rem] text-zinc-500 dark:text-zinc-400">Active Businesses</p>
+              <p className="text-[0.84rem] font-bold text-headline-main leading-tight">12,000+</p>
+              <p className="text-[0.68rem] text-body-muted">Active Businesses</p>
             </div>
           </motion.div>
 
@@ -327,8 +327,8 @@ function HeroShowcase() {
               </svg>
             </span>
             <div>
-              <p className="text-[0.84rem] font-bold text-zinc-950 dark:text-white leading-tight">98%</p>
-              <p className="text-[0.68rem] text-zinc-500 dark:text-zinc-400">Customer Satisfaction</p>
+              <p className="text-[0.84rem] font-bold text-headline-main leading-tight">98%</p>
+              <p className="text-[0.68rem] text-body-muted">Customer Satisfaction</p>
             </div>
           </motion.div>
 
@@ -384,8 +384,8 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
               <span className="flex items-center gap-1.5 rounded-full bg-violet-100 dark:bg-violet-500/15 px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-violet-700 dark:text-violet-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-violet-600 dark:bg-violet-400 animate-pulse-dot" /> LIVE
               </span>
-              <span className="text-[0.82rem] text-zinc-600 dark:text-zinc-300">
-                Now powering <span className="font-semibold text-zinc-950 dark:text-white">12,000+ businesses</span>
+              <span className="text-[0.82rem] text-body-main">
+                Now powering <span className="font-semibold text-headline-main">12,000+ businesses</span>
               </span>
             </motion.div>
 
@@ -411,10 +411,10 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease: EASE as unknown as number[] }}
-              className="mt-6 max-w-lg text-[1.02rem] leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-[1.08rem]"
+              className="mt-6 max-w-lg text-[1.02rem] leading-relaxed text-body-main sm:text-[1.08rem]"
             >
               Zyntai is the AI-powered platform where customers{" "}
-              <span className="font-semibold text-zinc-900 dark:text-zinc-100">browse, order, and get answers in seconds</span> — while
+              <span className="font-semibold text-headline-main">browse, order, and get answers in seconds</span> — while
               you automate the busywork and grow revenue.
             </motion.p>
 

@@ -122,7 +122,7 @@ export default function Nav() {
             transition={{ duration: 0.35 }}
             className="overflow-hidden border-b border-zinc-200/80 dark:border-char-700/60 bg-white/95 dark:bg-char-900/90 backdrop-blur-md shadow-xs dark:shadow-none"
           >
-            <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-[0.78rem] text-zinc-700 dark:text-zinc-300">
+            <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-[0.78rem] announcement-text">
               <IconBolt className="h-3.5 w-3.5 text-violet-600 dark:text-violet-400" />
               <span>
                 <span className="font-semibold text-violet-600 dark:text-violet-400">Zyntai 2.0</span> is live — AI
@@ -131,7 +131,7 @@ export default function Nav() {
               <a
                 href="#features"
                 onClick={handleAnchor("#features")}
-                className="link-underline hidden font-medium text-zinc-900 dark:text-zinc-100 hover:text-violet-600 dark:hover:text-violet-400 sm:inline"
+                className="link-underline hidden font-medium announcement-link hover:text-violet-600 dark:hover:text-violet-400 sm:inline"
               >
                 See what's new
               </a>
@@ -157,7 +157,7 @@ export default function Nav() {
             {NAV_LINKS.map((l) => {
               const route = routeFor(l.href);
               const cls = `link-underline text-[0.92rem] font-medium transition-colors duration-200 ${
-                isActive(l.href) ? "text-violet-600 dark:text-violet-400 font-semibold" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                isActive(l.href) ? "text-violet-600 dark:text-violet-400 font-semibold" : "text-body-main hover:text-headline-main"
               }`;
               return (
                 <li key={l.href}>
@@ -179,7 +179,7 @@ export default function Nav() {
             <ThemeToggle />
             <Link
               to="/login"
-              className="rounded-full px-4.5 py-2 text-[0.92rem] font-medium text-zinc-800 dark:text-zinc-200 transition-colors hover:text-violet-600 dark:hover:text-violet-400"
+              className="rounded-full px-4.5 py-2 text-[0.92rem] font-medium nav-login-btn transition-colors hover:text-violet-600 dark:hover:text-violet-400"
             >
               Log in
             </Link>

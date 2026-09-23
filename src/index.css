@@ -298,13 +298,13 @@ html.light {
   --color-char-700: #e4e4e7;
   --color-char-600: #d4d4d8;
 
-  /* Inverted zinc scale — ensures ALL headings and text are razor-sharp dark ink in light mode */
-  --color-zinc-950: #ffffff;
-  --color-zinc-900: #fafafa;
-  --color-zinc-800: #f4f4f5;
-  --color-zinc-700: #e4e4e7;
-  --color-zinc-600: #a1a1aa;
-  --color-zinc-500: #71717a;
+  /* All zinc text tokens in light mode are crisp, dark ink */
+  --color-zinc-950: #09090b;
+  --color-zinc-900: #111113;
+  --color-zinc-800: #18181b;
+  --color-zinc-700: #27272a;
+  --color-zinc-600: #3f3f46;
+  --color-zinc-500: #52525b;
   --color-zinc-400: #52525b;
   --color-zinc-300: #3f3f46;
   --color-zinc-200: #27272a;
@@ -330,6 +330,80 @@ html.light {
 html.light body {
   background-color: #ffffff;
   color: #52525b;
+}
+
+/* Bulletproof Theme-Contrast Rules */
+.text-headline-main {
+  color: #09090b;
+}
+html.dark .text-headline-main,
+.dark .text-headline-main {
+  color: #ffffff;
+}
+
+.text-brand-title {
+  color: #09090b;
+}
+html.dark .text-brand-title,
+.dark .text-brand-title {
+  color: #ffffff;
+}
+
+.text-body-main {
+  color: #52525b;
+}
+html.dark .text-body-main,
+.dark .text-body-main {
+  color: #d4d4d8;
+}
+
+.text-body-muted {
+  color: #71717a;
+}
+html.dark .text-body-muted,
+.dark .text-body-muted {
+  color: #a1a1aa;
+}
+
+.announcement-text {
+  color: #27272a;
+}
+html.dark .announcement-text,
+.dark .announcement-text {
+  color: #d4d4d8;
+}
+
+.announcement-link {
+  color: #09090b;
+}
+html.dark .announcement-link,
+.dark .announcement-link {
+  color: #ffffff;
+}
+
+.nav-login-btn {
+  color: #18181b;
+}
+html.dark .nav-login-btn,
+.dark .nav-login-btn {
+  color: #e4e4e7;
+}
+
+.chat-user-bubble {
+  background-color: #f4f4f5;
+  color: #18181b;
+}
+html.dark .chat-user-bubble,
+.dark .chat-user-bubble {
+  background-color: #1e1e22;
+  color: #e4e4e7;
+}
+
+html.light h1:not([class*="text-violet"]),
+html.light h2:not([class*="text-violet"]),
+html.light h3:not([class*="text-violet"]),
+html.light h4:not([class*="text-violet"]) {
+  color: #09090b;
 }
 
 html.light ::selection {

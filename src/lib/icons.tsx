@@ -187,7 +187,7 @@ export const Logo = ({ className = "" }: { className?: string }) => (
         <path d="M6 5.5h12L6 18.5h12" />
       </svg>
     </span>
-    <span className="font-display text-[1.35rem] font-bold tracking-tight text-zinc-900 dark:text-zinc-50 transition-colors">
+    <span className="font-display text-[1.35rem] font-bold tracking-tight text-brand-title transition-colors">
       Zyntai
     </span>
   </span>
