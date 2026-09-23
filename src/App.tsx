@@ -16,7 +16,15 @@ import Auth from "./pages/Auth";
 function useLenis(reduce: boolean | null, enabled: boolean) {
   useEffect(() => {
     if (reduce || !enabled) return;
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({
+      duration: 0.6,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1.2,
+      touchMultiplier: 1.5,
+    });
     let raf = 0;
     const loop = (t: number) => {
       lenis.raf(t);
@@ -32,7 +40,7 @@ function useLenis(reduce: boolean | null, enabled: boolean) {
       const el = document.querySelector(id);
       if (el) {
         e.preventDefault();
-        lenis.scrollTo(el as HTMLElement, { offset: -84, duration: 1.15, easing: (p) => 1 - Math.pow(1 - p, 4) });
+        lenis.scrollTo(el as HTMLElement, { offset: -84, duration: 0.7, easing: (p) => 1 - Math.pow(1 - p, 4) });
       }
     };
     document.addEventListener("click", onAnchor);

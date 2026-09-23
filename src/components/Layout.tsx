@@ -15,22 +15,37 @@ export function CursorGlow() {
     if (!window.matchMedia("(pointer: fine)").matches) return;
     setEnabled(true);
     let raf = 0;
+    let running = false;
     let tx = window.innerWidth / 2;
     let ty = 300;
     let x = tx;
     let y = ty;
+
+    const loop = () => {
+      const dx = tx - x;
+      const dy = ty - y;
+      x += dx * 0.12;
+      y += dy * 0.12;
+      if (ref.current) {
+        ref.current.style.transform = `translate3d(${x - 260}px, ${y - 260}px, 0)`;
+      }
+      if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+        raf = requestAnimationFrame(loop);
+      } else {
+        running = false;
+      }
+    };
+
     const onMove = (e: MouseEvent) => {
       tx = e.clientX;
       ty = e.clientY;
+      if (!running) {
+        running = true;
+        raf = requestAnimationFrame(loop);
+      }
     };
-    const loop = () => {
-      x += (tx - x) * 0.09;
-      y += (ty - y) * 0.09;
-      if (ref.current) ref.current.style.transform = `translate3d(${x - 260}px, ${y - 260}px, 0)`;
-      raf = requestAnimationFrame(loop);
-    };
+
     window.addEventListener("mousemove", onMove, { passive: true });
-    raf = requestAnimationFrame(loop);
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
@@ -42,10 +57,10 @@ export function CursorGlow() {
     <div
       ref={ref}
       aria-hidden
-      className="cursor-glow pointer-events-none fixed left-0 top-0 z-[1] h-[520px] w-[520px] rounded-full opacity-60 mix-blend-screen"
+      className="cursor-glow pointer-events-none fixed left-0 top-0 z-[1] h-[520px] w-[520px] rounded-full opacity-60 will-change-transform"
       style={{
         background:
-          "radial-gradient(closest-side, rgba(245,158,11,0.10), rgba(245,158,11,0.025) 55%, transparent 70%)",
+          "radial-gradient(closest-side, rgba(245,158,11,0.08), rgba(245,158,11,0.02) 55%, transparent 70%)",
       }}
     />
   );
@@ -199,8 +214,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       </motion.main>
       {!authPage && <Footer />}
       {!authPage && <BackToTop />}
-      {/* global film grain */}
-      <div className="grain pointer-events-none fixed inset-0 z-[70]" aria-hidden />
       <span className="sr-only">{location.pathname}</span>
     </div>
   );

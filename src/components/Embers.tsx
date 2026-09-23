@@ -51,23 +51,28 @@ export default function Embers({ className = "" }: { className?: string }) {
       hue: 32 + Math.random() * 16,
     });
 
+    let isVisible = true;
+    const obs = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    obs.observe(canvas);
+
     let t = 0;
     const loop = () => {
-      t += 0.016;
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < embers.length; i++) {
-        const e = embers[i];
-        e.y -= e.vy;
-        e.x += e.vx + Math.sin(t * 1.4 + e.phase) * 0.18;
-        if (e.y < -14 || e.x < -14 || e.x > w + 14) embers[i] = spawn(false);
-        const flicker = 0.65 + Math.sin(t * 3 + e.phase) * 0.35;
-        ctx.beginPath();
-        ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${e.hue}, 96%, 60%, ${e.a * flicker})`;
-        ctx.shadowColor = `hsla(${e.hue}, 96%, 55%, ${0.5 * flicker})`;
-        ctx.shadowBlur = 6;
-        ctx.fill();
-        ctx.shadowBlur = 0;
+      if (isVisible) {
+        t += 0.016;
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < embers.length; i++) {
+          const e = embers[i];
+          e.y -= e.vy;
+          e.x += e.vx + Math.sin(t * 1.4 + e.phase) * 0.18;
+          if (e.y < -14 || e.x < -14 || e.x > w + 14) embers[i] = spawn(false);
+          const flicker = 0.65 + Math.sin(t * 3 + e.phase) * 0.35;
+          ctx.beginPath();
+          ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${e.hue}, 96%, 60%, ${e.a * flicker})`;
+          ctx.fill();
+        }
       }
       raf = requestAnimationFrame(loop);
     };
@@ -77,6 +82,7 @@ export default function Embers({ className = "" }: { className?: string }) {
     window.addEventListener("resize", resize);
     return () => {
       cancelAnimationFrame(raf);
+      obs.disconnect();
       window.removeEventListener("resize", resize);
     };
   }, [reduce]);

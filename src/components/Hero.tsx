@@ -557,21 +557,19 @@ export default function Hero({ introReady = true }: { introReady?: boolean }) {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const yContent = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -70]);
-  const yMockup = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80]);
-  const yBg = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 170]);
-  const scaleBg = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.25]);
-  const fadeContent = useTransform(scrollYProgress, [0, 0.85], [1, 0.25]);
+  const yContent = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -40]);
+  const yMockup = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 50]);
+  const fadeContent = useTransform(scrollYProgress, [0, 0.85], [1, 0.3]);
 
   return (
     <section ref={sectionRef} id="top" className="relative overflow-hidden pt-36 sm:pt-44">
       {/* layered backdrop */}
       <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(75%_65%_at_50%_30%,black,transparent)]" />
-      <motion.div style={{ y: yBg, scale: scaleBg }} className="absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.16),transparent)] blur-2xl" />
-        <div className="absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-orange-400/[0.08] blur-3xl" />
-        <div className="absolute -right-32 top-16 h-80 w-80 rounded-full bg-amber-500/[0.08] blur-3xl" />
-      </motion.div>
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(245,158,11,0.16),transparent)] blur-xl" />
+        <div className="absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-orange-400/[0.08] blur-2xl" />
+        <div className="absolute -right-32 top-16 h-80 w-80 rounded-full bg-amber-500/[0.08] blur-2xl" />
+      </div>
       <FluidBg className="opacity-60" />
       <Embers />
 

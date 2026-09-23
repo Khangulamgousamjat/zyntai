@@ -144,10 +144,16 @@ export default function FluidBg({ className = "" }: { className?: string }) {
       };
     }
 
+    let isVisible = true;
+    const obs = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    });
+    obs.observe(canvas);
+
     const start = performance.now();
     let lastFrame = 0;
     const loop = (now: number) => {
-      if (now - lastFrame >= 33) {
+      if (isVisible && now - lastFrame >= 40) {
         frame((now - start) / 1000);
         lastFrame = now;
       }
@@ -158,6 +164,7 @@ export default function FluidBg({ className = "" }: { className?: string }) {
     window.addEventListener("resize", onResize);
     return () => {
       cancelAnimationFrame(raf);
+      obs.disconnect();
       window.removeEventListener("resize", onResize);
       g.deleteProgram(prog);
       g.deleteBuffer(buf);
@@ -172,7 +179,7 @@ export default function FluidBg({ className = "" }: { className?: string }) {
       ref={ref}
       aria-hidden
       className={`pointer-events-none absolute inset-0 h-full w-full ${
-        light ? "opacity-50 mix-blend-multiply" : "opacity-70 mix-blend-screen"
+        light ? "opacity-40" : "opacity-65"
       } ${className}`}
     />
   );
