@@ -458,6 +458,9 @@ export default function Auth({ mode }: { mode: "login" | "signup" }) {
           <p className="mt-4 text-center text-[0.72rem] text-zinc-600">
             Protected by 256-bit encryption · SOC 2 in progress
           </p>
+          <p className="mt-2 text-center text-[0.78rem] font-medium text-zinc-500 transition-colors hover:text-amber-300">
+            Craft with <span className="font-semibold text-amber-300">gous khan</span>
+          </p>
         </div>
       </div>
     </main>

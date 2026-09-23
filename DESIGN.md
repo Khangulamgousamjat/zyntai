@@ -64,3 +64,9 @@ Reuse the classes — never restyle inline:
 - Container: `max-w-7xl` (1280px) with `px-5 sm:px-8`.
 - Section rhythm: `py-28 sm:py-36` (112–144px).
 - Layer order: canvas glows → grid texture → fluid shader → particles → glass → content.
+
+---
+
+*Craft with gous khan*
+
+

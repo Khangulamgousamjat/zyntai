@@ -1,6 +1,7 @@
 {
   "name": "sandbox-workspace",
   "private": true,
+  "author": "gous khan",
   "type": "module",
   "scripts": {
     "dev": "vite",

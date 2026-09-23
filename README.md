@@ -5,6 +5,8 @@
 
 Turn conversations into customers, orders into revenue, and operations into autopilot.
 
+**Craft with gous khan**
+
 [![Vite](https://img.shields.io/badge/Vite-6.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -233,3 +235,10 @@ VITE_ANALYTICS_ID=
 ## 📄 License & Attribution
 
 Distributed under the **MIT License**. Engineered with craft by the Zyntai engineering group.
+
+<div align="center">
+<br />
+
+**Craft with gous khan**
+
+</div>

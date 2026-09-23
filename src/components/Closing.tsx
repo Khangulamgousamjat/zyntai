@@ -247,6 +247,12 @@ export function Footer() {
             All systems operational
           </p>
         </div>
+
+        <div className="mt-8 flex items-center justify-center border-t border-white/[0.04] pt-6 pb-2">
+          <p className="text-[0.82rem] font-medium tracking-wide text-zinc-500 transition-colors hover:text-amber-300">
+            Craft with <span className="font-semibold text-amber-300">gous khan</span>
+          </p>
+        </div>
       </div>
 
       {/* toast */}
