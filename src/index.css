@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
@@ -286,19 +288,35 @@ html.lenis, html.lenis body { height: auto; }
    LIGHT THEME — Clean White / Off-White + Violet Accent
    ============================================================ */
 html.light {
-  background-color: #fafafa;
-  --color-char-950: #fafafa;
-  --color-char-900: #ffffff;
-  --color-char-800: #ffffff;
+  background-color: #ffffff;
+  color: #18181b;
+
+  /* Char tokens in light mode */
+  --color-char-950: #ffffff;
+  --color-char-900: #fafafa;
+  --color-char-800: #f4f4f5;
   --color-char-700: #e4e4e7;
   --color-char-600: #d4d4d8;
 
-  --bg-main: #fafafa;
+  /* Inverted zinc scale — ensures ALL headings and text are razor-sharp dark ink in light mode */
+  --color-zinc-950: #ffffff;
+  --color-zinc-900: #fafafa;
+  --color-zinc-800: #f4f4f5;
+  --color-zinc-700: #e4e4e7;
+  --color-zinc-600: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-400: #52525b;
+  --color-zinc-300: #3f3f46;
+  --color-zinc-200: #27272a;
+  --color-zinc-100: #18181b;
+  --color-zinc-50: #09090b;
+
+  --bg-main: #ffffff;
   --bg-surface: #ffffff;
   --bg-card: #ffffff;
   --border-subtle: #e4e4e7;
   --border-strong: #d4d4d8;
-  --text-primary: #18181b;
+  --text-primary: #09090b;
   --text-secondary: #52525b;
   --text-muted: #71717a;
   --accent-primary: #7c3aed;
@@ -310,7 +328,7 @@ html.light {
 }
 
 html.light body {
-  background-color: #fafafa;
+  background-color: #ffffff;
   color: #52525b;
 }
 

@@ -2,65 +2,39 @@ import { motion } from "framer-motion";
 import { LOGOS, STATS } from "../lib/data";
 import { Counter, EASE, Reveal } from "../lib/motion";
 
-function LogoMark({ i }: { i: number }) {
-  const cls = "h-5 w-5 transition-colors duration-500";
-  switch (i % 4) {
-    case 0:
-      return (
-        <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-          <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" />
-        </svg>
-      );
-    case 1:
-      return (
-        <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 12h4l2.5-6 4 12 2.5-6H21" />
-        </svg>
-      );
-    case 2:
-      return (
-        <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 3a9 9 0 1 0 9 9c-5 0-9-4-9-9Z" />
-          <path d="M12 8v4l2.5 1.5" />
-        </svg>
-      );
-    default:
-      return (
-        <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 15.5 12 4l8 11.5H4Z" />
-          <path d="M9 19.5h6" />
-        </svg>
-      );
-  }
-}
 
 function Wordmark({ name, style }: { name: string; style: string }) {
-  if (style === "serif")
-    return <span className="font-accent text-[1.35rem] italic tracking-wide">{name}</span>;
-  if (style === "wide")
-    return <span className="font-display text-[0.95rem] font-bold tracking-[0.28em]">{name}</span>;
-  return <span className="font-display text-[1.15rem] font-medium tracking-tight">{name}</span>;
+  if (style === "meta")
+    return <span className="text-[0.86rem] font-medium text-zinc-500 dark:text-zinc-400">{name}</span>;
+  if (name.toLowerCase() === "nykaa")
+    return <span className="font-serif text-[1.35rem] font-bold tracking-wide">{name}</span>;
+  if (name.toLowerCase() === "zomato")
+    return <span className="font-display text-[1.25rem] font-black lowercase italic tracking-tight">{name}</span>;
+  if (name.toLowerCase() === "boat")
+    return <span className="font-display text-[1.25rem] font-extrabold tracking-tight">bo<span className="text-violet-600 dark:text-violet-400">A</span>t</span>;
+  if (name.toLowerCase() === "flipkart")
+    return <span className="font-display text-[1.25rem] font-bold italic tracking-tight">{name}</span>;
+  return <span className="font-display text-[1.25rem] font-bold tracking-tight">{name}</span>;
 }
 
 export default function Proof() {
   const doubled = [...LOGOS, ...LOGOS];
   return (
-    <section className="relative border-y border-white/[0.05] bg-char-900/40 py-14">
+    <section className="relative border-y border-zinc-200/80 dark:border-white/[0.05] bg-zinc-50/60 dark:bg-char-900/40 py-12">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
-          <p className="text-center text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-zinc-600">
-            Powering teams at
+          <p className="text-center text-[0.74rem] font-bold uppercase tracking-[0.24em] text-zinc-500 dark:text-zinc-400">
+            TRUSTED BY GROWING BRANDS
           </p>
         </Reveal>
 
-        <div className="marquee-mask marquee-paused mt-8 overflow-hidden">
+        <div className="marquee-mask marquee-paused mt-7 overflow-hidden">
           <div className="marquee-track flex w-max items-center gap-14 pr-14">
             {doubled.map((l, i) => (
               <div
                 key={`${l.name}-${i}`}
-                className="group flex cursor-default items-center gap-2.5 text-zinc-600 transition-all duration-500 hover:scale-[1.04] hover:text-violet-400"
+                className="group flex cursor-default items-center gap-2 text-zinc-800 dark:text-zinc-200 transition-all duration-300 hover:scale-[1.04] hover:text-violet-600 dark:hover:text-violet-400"
               >
-                <LogoMark i={i} />
                 <Wordmark name={l.name} style={l.style} />
               </div>
             ))}

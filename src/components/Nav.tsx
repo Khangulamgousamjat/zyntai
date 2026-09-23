@@ -18,7 +18,7 @@ function ThemeToggle({ compact = false }: { compact?: boolean }) {
       onClick={toggle}
       aria-label={light ? "Switch to dark mode" : "Switch to light mode"}
       title={light ? "Switch to dark mode" : "Switch to light mode"}
-      className={`relative grid place-items-center overflow-hidden rounded-full border border-char-700 bg-char-800/80 text-zinc-300 transition-all duration-300 hover:border-violet-500/50 hover:text-violet-400 active:scale-90 ${
+      className={`relative grid place-items-center overflow-hidden rounded-full border border-zinc-200 dark:border-char-700 bg-white dark:bg-char-800/80 text-zinc-700 dark:text-zinc-300 shadow-xs dark:shadow-none transition-all duration-300 hover:border-violet-500/50 hover:text-violet-600 dark:hover:text-violet-400 active:scale-90 ${
         compact ? "h-11 w-11" : "h-10 w-10"
       }`}
     >
@@ -120,18 +120,18 @@ export default function Nav() {
             initial={false}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="overflow-hidden border-b border-char-700/60 bg-char-900/80 backdrop-blur-md"
+            className="overflow-hidden border-b border-zinc-200/80 dark:border-char-700/60 bg-white/95 dark:bg-char-900/90 backdrop-blur-md shadow-xs dark:shadow-none"
           >
-            <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-[0.78rem] text-zinc-400">
-              <IconBolt className="h-3.5 w-3.5 text-violet-500" />
+            <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-[0.78rem] text-zinc-700 dark:text-zinc-300">
+              <IconBolt className="h-3.5 w-3.5 text-violet-600 dark:text-violet-400" />
               <span>
-                <span className="font-semibold text-violet-400">Zyntai 2.0</span> is live — AI
+                <span className="font-semibold text-violet-600 dark:text-violet-400">Zyntai 2.0</span> is live — AI
                 assistant, smart workflows & advanced analytics.
               </span>
               <a
                 href="#features"
                 onClick={handleAnchor("#features")}
-                className="link-underline hidden font-medium text-zinc-200 hover:text-violet-400 sm:inline"
+                className="link-underline hidden font-medium text-zinc-900 dark:text-zinc-100 hover:text-violet-600 dark:hover:text-violet-400 sm:inline"
               >
                 See what's new
               </a>
@@ -157,7 +157,7 @@ export default function Nav() {
             {NAV_LINKS.map((l) => {
               const route = routeFor(l.href);
               const cls = `link-underline text-[0.92rem] font-medium transition-colors duration-200 ${
-                isActive(l.href) ? "text-violet-500 font-semibold" : "text-zinc-400 hover:text-zinc-100"
+                isActive(l.href) ? "text-violet-600 dark:text-violet-400 font-semibold" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
               }`;
               return (
                 <li key={l.href}>
@@ -179,13 +179,13 @@ export default function Nav() {
             <ThemeToggle />
             <Link
               to="/login"
-              className="rounded-full px-4.5 py-2 text-[0.92rem] font-medium text-zinc-300 transition-colors hover:text-violet-400"
+              className="rounded-full px-4.5 py-2 text-[0.92rem] font-medium text-zinc-800 dark:text-zinc-200 transition-colors hover:text-violet-600 dark:hover:text-violet-400"
             >
               Log in
             </Link>
             <Link
               to="/signup"
-              className="btn btn-primary group relative overflow-hidden px-5 py-2.5 text-[0.92rem]"
+              className="btn btn-primary group relative overflow-hidden rounded-xl px-5 py-2.5 text-[0.92rem]"
             >
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
               Start free

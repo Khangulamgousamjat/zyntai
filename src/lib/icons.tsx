@@ -182,13 +182,12 @@ export const IconBird = (p: P) => (
 
 export const Logo = ({ className = "" }: { className?: string }) => (
   <span className={`inline-flex items-center gap-2.5 ${className}`}>
-    <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-[#09090B] border border-[#27272A] shadow-sm">
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#FFFFFF" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 5h12L6 19h12" />
+    <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-[#7C3AED] shadow-sm transition-transform hover:scale-105">
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="#FFFFFF" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 5.5h12L6 18.5h12" />
       </svg>
-      <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-[#8B5CF6] ring-2 ring-[#09090B]" />
     </span>
-    <span className="font-display text-[1.35rem] font-bold tracking-tight text-[#18181B] dark:text-[#FAFAFA] transition-colors">
+    <span className="font-display text-[1.35rem] font-bold tracking-tight text-zinc-900 dark:text-zinc-50 transition-colors">
       Zyntai
     </span>
   </span>

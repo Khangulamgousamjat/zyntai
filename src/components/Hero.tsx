@@ -8,29 +8,23 @@ import {
 } from "framer-motion";
 import Embers from "./Embers";
 import FluidBg from "./FluidBg";
-import { TICKER_ORDERS } from "../lib/data";
 import { EASE, Magnetic } from "../lib/motion";
 import {
   IconPlay,
   IconArrow,
   IconStar,
-  IconBell,
-  IconSound,
-  IconUpsell,
-  IconX,
   IconBolt,
-  IconCheck,
-  IconTrack,
   IconChart,
+  IconX,
 } from "../lib/icons";
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.055, delayChildren: 0.2 } },
+  show: { transition: { staggerChildren: 0.055, delayChildren: 0.15 } },
 };
 const word: Variants = {
-  hidden: { y: "112%", rotate: 5 },
-  show: { y: "0%", rotate: 0, transition: { duration: 0.9, ease: EASE as unknown as number[] } },
+  hidden: { y: "112%", rotate: 4 },
+  show: { y: "0%", rotate: 0, transition: { duration: 0.85, ease: EASE as unknown as number[] } },
 };
 
 function MaskedWord({ children, accent = false }: { children: string; accent?: boolean }) {
@@ -39,7 +33,9 @@ function MaskedWord({ children, accent = false }: { children: string; accent?: b
       <motion.span
         variants={word}
         className={`inline-block will-change-transform ${
-          accent ? "font-accent italic font-normal text-violet-400 text-[1.06em]" : ""
+          accent
+            ? "font-accent italic font-normal text-violet-600 dark:text-violet-400 text-[1.06em]"
+            : "text-zinc-950 dark:text-white"
         }`}
       >
         {children}
@@ -55,367 +51,15 @@ const HEADLINE: { t: string; accent?: boolean; br?: boolean }[] = [
   { t: "customers.", accent: true },
 ];
 
-const STATUS_STYLE: Record<string, string> = {
-  New: "bg-violet-500/15 text-violet-400 border-violet-500/30",
-  Processing: "bg-zinc-700/25 text-zinc-300 border-zinc-700/40",
-  Paid: "bg-emerald-400/10 text-emerald-400 border-emerald-400/25",
-};
-
-function DashboardMockup() {
-  const reduce = useReducedMotion();
-  const [orders, setOrders] = useState(
-    TICKER_ORDERS.slice(0, 4).map((o, i) => ({ ...o, key: i }))
-  );
-  const [revenue, setRevenue] = useState(4182);
-  const idx = useRef(4);
-
+/* Demo modal */
+function DemoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
-    if (reduce) return;
-    const t = setInterval(() => {
-      const next = TICKER_ORDERS[idx.current % TICKER_ORDERS.length];
-      idx.current += 1;
-      setOrders((prev) => [{ ...next, key: idx.current + 100 }, ...prev].slice(0, 4));
-      setRevenue((r) => r + Math.round(28 + Math.random() * 62));
-    }, 3400);
-    return () => clearInterval(t);
-  }, [reduce]);
-
-  const bars = [36, 48, 42, 58, 52, 66, 60, 74, 69, 85, 78, 91, 88, 100];
-  const days = ["M", "T", "W", "T", "F", "S", "S", "M", "T", "W", "T", "F", "S", "S"];
-
-  return (
-    <motion.div
-      id="demo"
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 70, rotateX: 7 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 1.1, ease: EASE as unknown as number[] }}
-      style={{ transformPerspective: 1200 }}
-      className="relative mx-auto w-full max-w-5xl"
-    >
-      {/* glow behind */}
-      <div className="absolute -inset-8 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_35%,rgba(124,58,237,0.12),transparent_70%)] blur-2xl" />
-
-      <div className="glass relative overflow-hidden rounded-[1.25rem] shadow-[0_40px_120px_-24px_rgba(0,0,0,0.6)]">
-        {/* chrome bar */}
-        <div className="flex items-center gap-3 border-b border-char-700/60 bg-white/[0.02] px-4 py-3">
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-          </div>
-          <div className="mx-auto flex items-center gap-2 rounded-full border border-char-700 bg-char-950/70 px-4 py-1 text-[0.72rem] text-zinc-500">
-            <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="5" y="10" width="14" height="10" rx="2" />
-              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-            </svg>
-            app.zyntai.com/orders
-          </div>
-          <span className="flex items-center gap-1.5 rounded-full border border-violet-500/25 bg-violet-500/10 px-2.5 py-1 text-[0.68rem] font-semibold text-violet-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />
-            LIVE
-          </span>
-        </div>
-
-        <div className="grid grid-cols-[auto_1fr]">
-          {/* sidebar */}
-          <div className="hidden w-14 flex-col items-center gap-5 border-r border-char-700/60 py-5 sm:flex">
-            {["grid", "menu", "chat", "chart", "gear"].map((k, i) => (
-              <span
-                key={k}
-                className={`grid h-9 w-9 place-items-center rounded-xl ${
-                  i === 0 ? "bg-violet-500/15 text-violet-400" : "text-zinc-600"
-                }`}
-              >
-                {k === "grid" && (
-                  <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.7">
-                    <rect x="4" y="4" width="7" height="7" rx="1.6" />
-                    <rect x="13" y="4" width="7" height="7" rx="1.6" />
-                    <rect x="4" y="13" width="7" height="7" rx="1.6" />
-                    <rect x="13" y="13" width="7" height="7" rx="1.6" />
-                  </svg>
-                )}
-                {k === "menu" && (
-                  <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-                    <path d="M5 6h14M5 12h14M5 18h9" />
-                  </svg>
-                )}
-                {k === "chat" && (
-                  <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-                    <path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-.8 3.4A8 8 0 0 1 21 12Z" />
-                  </svg>
-                )}
-                {k === "chart" && (
-                  <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-                    <path d="M5 20V10M12 20V4M19 20v-7" />
-                  </svg>
-                )}
-                {k === "gear" && (
-                  <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
-                    <circle cx="12" cy="12" r="3.2" />
-                    <path d="M12 3.5v2.4M12 18.1v2.4M3.5 12h2.4M18.1 12h2.4M6 6l1.7 1.7M16.3 16.3 18 18M18 6l-1.7 1.7M7.7 16.3 6 18" />
-                  </svg>
-                )}
-              </span>
-            ))}
-          </div>
-
-          {/* main */}
-          <div className="p-4 sm:p-6">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="font-display text-sm font-semibold text-zinc-100">Nova Studio — live orders</p>
-                <p className="text-[0.72rem] text-zinc-500">Dashboard · updated just now</p>
-              </div>
-              <div className="flex items-center gap-2 rounded-full border border-char-700 bg-char-800/80 px-3 py-1.5">
-                <IconSound className="h-3.5 w-3.5 text-violet-400" />
-                <span className="flex h-3.5 items-end gap-[3px]">
-                  {[0.9, 0.5, 1, 0.65, 0.8].map((d, i) => (
-                    <span
-                      key={i}
-                      className="eq-bar w-[3px] rounded-full bg-violet-400"
-                      style={{ height: "100%", animationDelay: `${i * 0.12}s`, animationDuration: `${d}s` }}
-                    />
-                  ))}
-                </span>
-                <span className="text-[0.68rem] font-medium text-zinc-400">Instant alerts on</span>
-              </div>
-            </div>
-
-            {/* KPI row */}
-            <div className="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {[
-                { label: "Today's revenue", val: `$${revenue.toLocaleString()}`, delta: "+18%", live: true },
-                { label: "Orders", val: `${96 + (idx.current - 4)}`, delta: "+12%" },
-                { label: "Avg. order", val: "$43.50", delta: "+6%" },
-                { label: "Avg. response", val: "1m 20s", delta: "−40s" },
-              ].map((k) => (
-                <div
-                  key={k.label}
-                  className="rounded-xl border border-char-700/60 bg-char-800/50 px-4 py-3.5 transition-colors hover:border-violet-500/30"
-                >
-                  <p className="text-[0.68rem] uppercase tracking-wider text-zinc-500">{k.label}</p>
-                  <div className="mt-1 flex items-baseline gap-2">
-                    <span className="font-display text-lg font-bold text-zinc-50 sm:text-xl">{k.val}</span>
-                    <span className="text-[0.66rem] font-semibold text-emerald-400">
-                      {k.delta}
-                    </span>
-                    {k.live && <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" />}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid gap-4 lg:grid-cols-[1.15fr_1fr]">
-              {/* chart */}
-              <div className="rounded-xl border border-char-700/60 bg-char-800/50 p-4">
-                <div className="mb-4 flex items-center justify-between">
-                  <p className="font-display text-[0.8rem] font-semibold text-zinc-200">Revenue · last 14 days</p>
-                  <span className="rounded-full bg-violet-500/10 px-2 py-0.5 text-[0.64rem] font-semibold text-violet-400">
-                    Peak: Sat $2.4k
-                  </span>
-                </div>
-                <div className="flex h-32 items-end gap-[5px] sm:gap-2">
-                  {bars.map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={reduce ? { opacity: 0 } : { scaleY: 0.06 }}
-                      whileInView={{ scaleY: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.7, delay: 0.05 * i, ease: EASE as unknown as number[] }}
-                      style={{ height: `${h}%`, transformOrigin: "bottom" }}
-                      className={`group relative flex-1 rounded-t-md ${
-                        i === bars.length - 1
-                          ? "bg-gradient-to-t from-violet-600 to-violet-400 shadow-[0_0_14px_rgba(139,92,246,0.35)]"
-                          : "bg-gradient-to-t from-violet-900/30 to-violet-500/50 group-hover:to-violet-400"
-                      } transition-colors`}
-                    >
-                      <span className="pointer-events-none absolute -top-6 left-1/2 -translate-x-1/2 rounded bg-char-950 px-1.5 py-0.5 text-[0.58rem] text-zinc-400 opacity-0 transition-opacity group-hover:opacity-100">
-                        {days[i]}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* live feed */}
-              <div className="flex flex-col rounded-xl border border-char-700/60 bg-char-800/50 p-4">
-                <div className="mb-3 flex items-center justify-between">
-                  <p className="font-display text-[0.8rem] font-semibold text-zinc-200">Incoming orders</p>
-                  <span className="flex items-center gap-1.5 text-[0.66rem] font-medium text-emerald-400">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-dot" />
-                    streaming
-                  </span>
-                </div>
-                <div className="flex flex-col gap-2.5">
-                  <AnimatePresence initial={false} mode="popLayout">
-                    {orders.map((o) => (
-                      <motion.div
-                        key={o.key}
-                        layout
-                        initial={reduce ? { opacity: 0 } : { opacity: 0, y: -22, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.45, ease: EASE as unknown as number[] }}
-                        className="flex items-center gap-3 rounded-xl border border-char-700/60 bg-char-950/70 px-3 py-2.5"
-                      >
-                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-violet-500/15 text-violet-400">
-                          <IconBell className="h-4 w-4" />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate text-[0.78rem] font-semibold text-zinc-100">
-                            {o.id} · {o.item}
-                          </p>
-                          <p className="text-[0.66rem] text-zinc-500">{o.meta}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-[0.78rem] font-bold text-zinc-100">{o.total}</p>
-                          <span className={`mt-0.5 inline-block rounded-full border px-1.5 py-[1px] text-[0.58rem] font-semibold ${STATUS_STYLE[o.status]}`}>
-                            {o.status}
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-/* floating chips around the mockup */
-function FloatChips() {
-  const reduce = useReducedMotion();
-  if (reduce) return null;
-  return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, x: -24 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.9, duration: 0.7, ease: EASE as unknown as number[] }}
-        className="glass absolute -left-8 top-16 z-10 hidden items-center gap-2.5 rounded-xl px-4 py-3 shadow-xl md:flex animate-float-slow"
-        style={{ "--tilt": "-3deg" } as React.CSSProperties}
-      >
-        <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-500/15 text-violet-400">
-          <IconBell className="h-4.5 w-4.5" />
-        </span>
-        <div>
-          <p className="text-[0.74rem] font-semibold text-zinc-100">New order · #1042</p>
-          <p className="text-[0.66rem] text-zinc-500">Pro Plan — annual · $240</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: 24 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 1.1, duration: 0.7, ease: EASE as unknown as number[] }}
-        className="glass absolute -right-6 top-1/3 z-10 hidden items-center gap-2 rounded-xl px-4 py-3 shadow-xl lg:flex animate-float-slower"
-        style={{ "--tilt": "2.5deg" } as React.CSSProperties}
-      >
-        <IconUpsell className="h-4.5 w-4.5 text-violet-400" />
-        <div>
-          <p className="text-[0.74rem] font-semibold text-zinc-100">+24% order value</p>
-          <p className="text-[0.66rem] text-zinc-500">smart upsells this week</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 1.3, duration: 0.7, ease: EASE as unknown as number[] }}
-        className="glass absolute -bottom-6 left-14 z-10 hidden items-center gap-2.5 rounded-xl px-4 py-3 shadow-xl lg:flex animate-float-slow"
-        style={{ "--tilt": "1.5deg", animationDelay: "1.2s" } as React.CSSProperties}
-      >
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-emerald-400/15 text-emerald-400">
-          <IconCheck className="h-4 w-4" />
-        </span>
-        <p className="text-[0.74rem] font-semibold text-zinc-100">
-          Order #1041 fulfilled <span className="text-zinc-500">· customer notified</span>
-        </p>
-      </motion.div>
-    </>
-  );
-}
-
-function RotatingBadge() {
-  return (
-    <div className="absolute -right-9 -top-9 z-10 hidden h-28 w-28 lg:block animate-spin-slow">
-      <svg viewBox="0 0 100 100" className="h-full w-full">
-        <defs>
-          <path id="circ" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
-        </defs>
-        <circle cx="50" cy="50" r="49" className="fill-char-900/80 stroke-char-700" />
-        <text className="fill-violet-400/90 text-[8.2px] font-semibold uppercase tracking-[0.32em]">
-          <textPath href="#circ">zyntai · customer os · since 2024 ·</textPath>
-        </text>
-      </svg>
-      <span className="absolute inset-0 grid place-items-center">
-        <IconBolt className="h-6 w-6 text-violet-400" />
-      </span>
-    </div>
-  );
-}
-
-/* ---------- demo modal ---------- */
-const SLIDES = [
-  {
-    title: "Your catalog, online in minutes",
-    desc: "Upload a spreadsheet — Zyntai builds a beautiful, branded order page with your logo, colors, and pricing.",
-    icon: IconCheck,
-    visual: "menu",
-  },
-  {
-    title: "Orders land instantly",
-    desc: "Your dashboard chimes, every order queues by priority, and nothing slips through the cracks.",
-    icon: IconBell,
-    visual: "bell",
-  },
-  {
-    title: "Customers stay in the loop",
-    desc: "Live status pages and instant updates cut “where's my order?” tickets by 68%.",
-    icon: IconTrack,
-    visual: "track",
-  },
-  {
-    title: "Watch revenue climb",
-    desc: "Smart upsells and re-engagement run on autopilot — most teams see +24% order value.",
-    icon: IconChart,
-    visual: "chart",
-  },
-];
-
-export function DemoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [slide, setSlide] = useState(0);
-  const reduce = useReducedMotion();
-
-  useEffect(() => {
-    if (!open) return;
-    setSlide(0);
-    document.body.style.overflow = "hidden";
-    let t: number | undefined;
-    if (!reduce) {
-      t = window.setInterval(() => setSlide((s) => (s + 1) % SLIDES.length), 4000);
-    }
-    return () => {
-      window.clearInterval(t);
-      document.body.style.overflow = "";
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
     };
-  }, [open, reduce]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  const s = SLIDES[slide];
+    if (open) window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [open, onClose]);
 
   return (
     <AnimatePresence>
@@ -424,119 +68,37 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[90] grid place-items-center bg-char-950/80 p-4 backdrop-blur-md"
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-50 grid place-items-center bg-black/80 p-4 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.94 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.96 }}
-            transition={{ duration: 0.5, ease: EASE as unknown as number[] }}
+            initial={{ scale: 0.94, opacity: 0, y: 16 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.94, opacity: 0, y: 16 }}
+            transition={{ duration: 0.3, ease: EASE as unknown as number[] }}
             onClick={(e) => e.stopPropagation()}
-            className="glass relative w-full max-w-lg overflow-hidden rounded-[1.25rem] border border-char-700 p-7 shadow-2xl sm:p-9"
+            className="relative w-full max-w-3xl overflow-hidden rounded-2xl border border-zinc-200 dark:border-char-700 bg-white dark:bg-char-900 shadow-2xl"
           >
-            <button
-              onClick={onClose}
-              aria-label="Close demo"
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-char-700 text-zinc-400 transition-colors hover:border-violet-500/50 hover:text-violet-400"
-            >
-              <IconX className="h-4 w-4" />
-            </button>
-
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-violet-400">
-              60-second tour · {slide + 1}/{SLIDES.length}
-            </p>
-
-            <div className="mt-5 grid h-40 place-items-center rounded-xl border border-char-700 bg-char-950/70">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={slide}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.4 }}
-                  className="flex flex-col items-center gap-3"
-                >
-                  <span className="grid h-14 w-14 place-items-center rounded-xl bg-char-900 border border-violet-500/30 text-violet-400 shadow-[0_0_28px_rgba(124,58,237,0.25)]">
-                    <s.icon className="h-7 w-7" />
-                  </span>
-                  {s.visual === "track" && (
-                    <div className="flex items-center gap-1.5">
-                      {["Received", "Processing", "Done"].map((t, i) => (
-                        <span
-                          key={t}
-                          className={`rounded-full border px-2.5 py-1 text-[0.62rem] font-semibold ${
-                            i === 1 ? "border-violet-500/40 bg-violet-500/10 text-violet-400" : "border-char-700 text-zinc-500"
-                          }`}
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  {s.visual === "chart" && (
-                    <div className="flex h-8 items-end gap-1.5">
-                      {[40, 65, 50, 85, 100].map((h, i) => (
-                        <motion.span
-                          key={i}
-                          initial={{ scaleY: 0.2 }}
-                          animate={{ scaleY: 1 }}
-                          transition={{ delay: 0.1 * i, duration: 0.5 }}
-                          style={{ height: h, transformOrigin: "bottom" }}
-                          className="w-4 rounded-t bg-gradient-to-t from-violet-700 to-violet-400"
-                        />
-                      ))}
-                    </div>
-                  )}
-                  {s.visual === "bell" && (
-                    <span className="flex h-6 items-end gap-1">
-                      {[0, 1, 2, 3, 4, 5].map((i) => (
-                        <span key={i} className="eq-bar w-1.5 rounded-full bg-violet-400" style={{ height: "100%", animationDelay: `${i * 0.1}s` }} />
-                      ))}
-                    </span>
-                  )}
-                  {s.visual === "menu" && (
-                    <div className="flex gap-2">
-                      {["Plans", "Add-ons", "Services"].map((t, i) => (
-                        <span key={t} className={`rounded-full border px-3 py-1 text-[0.64rem] font-semibold ${i === 0 ? "border-violet-500/40 bg-violet-500/10 text-violet-400" : "border-char-700 text-zinc-500"}`}>
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={slide}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35 }}
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-char-700 px-5 py-3.5">
+              <span className="font-display text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                Zyntai 60-Second Overview
+              </span>
+              <button
+                onClick={onClose}
+                className="grid h-8 w-8 place-items-center rounded-lg text-zinc-500 hover:bg-zinc-100 dark:hover:bg-char-800 hover:text-zinc-900 dark:hover:text-zinc-200"
               >
-                <h3 className="font-display mt-5 text-xl font-bold text-zinc-50">{s.title}</h3>
-                <p className="mt-2 text-[0.92rem] leading-relaxed text-zinc-400">{s.desc}</p>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="mt-6 flex items-center justify-between">
-              <div className="flex gap-2">
-                {SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    aria-label={`Go to slide ${i + 1}`}
-                    onClick={() => setSlide(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === slide ? "w-8 bg-violet-500" : "w-3 bg-zinc-700 hover:bg-zinc-600"
-                    }`}
-                  />
-                ))}
-              </div>
-              <Link to="/signup" onClick={onClose} className="btn btn-primary px-4 py-2 text-[0.82rem]">
-                Try it free <IconArrow className="h-3.5 w-3.5" />
-              </Link>
+                <IconX className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="relative aspect-video w-full bg-zinc-950">
+              <iframe
+                className="h-full w-full"
+                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="Product walkthrough"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
           </motion.div>
         </motion.div>
@@ -545,138 +107,389 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
   );
 }
 
-/* ---------- hero ---------- */
-export default function Hero({ introReady = true }: { introReady?: boolean }) {
-  const [demoOpen, setDemoOpen] = useState(false);
+/* AI Conversational & Analytics Showcase Mockup */
+function HeroShowcase() {
   const reduce = useReducedMotion();
+  const [selectedOption, setSelectedOption] = useState<string>("Bracelets");
+  const options = ["Bracelets", "Sunglasses", "Earrings", "Other"];
 
   return (
-    <section id="top" className="relative overflow-hidden pt-36 sm:pt-44">
-      {/* layered backdrop */}
-      <div className="absolute inset-0 grid-lines [mask-image:radial-gradient(75%_65%_at_50%_30%,black,transparent)]" />
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(124,58,237,0.12),transparent)] blur-xl" />
-        <div className="absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-violet-600/[0.04] blur-2xl" />
-        <div className="absolute -right-32 top-16 h-80 w-80 rounded-full bg-violet-700/[0.04] blur-2xl" />
-      </div>
-      <FluidBg className="opacity-40" />
-      <Embers />
+    <motion.div
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.9, delay: 0.3, ease: EASE as unknown as number[] }}
+      className="relative mx-auto w-full max-w-[540px] lg:max-w-none"
+    >
+      {/* Glow behind */}
+      <div className="absolute -inset-4 sm:-inset-8 rounded-[3rem] bg-[radial-gradient(60%_60%_at_50%_35%,rgba(124,58,237,0.18),transparent_70%)] blur-2xl pointer-events-none" />
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="max-w-5xl">
-          <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE as unknown as number[] }}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-char-700 bg-char-900/60 py-1.5 pl-2 pr-4 backdrop-blur-md"
-          >
-            <span className="flex items-center gap-1.5 rounded-full bg-violet-500/15 px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-violet-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse-dot" /> Live
-            </span>
-            <span className="text-[0.82rem] text-zinc-400">
-              Now powering <span className="font-semibold text-zinc-200">12,000+ businesses</span>
-            </span>
-          </motion.div>
-
-          <motion.h1
-            variants={container}
-            initial="hidden"
-            animate={introReady ? "show" : "hidden"}
-            className="font-display text-[2.75rem] font-bold leading-[1.04] tracking-tight text-zinc-50 sm:text-6xl lg:text-7xl xl:text-[4.9rem]"
-          >
-            {HEADLINE.map((w, i) => (
-              <span key={i}>
-                {w.br && <br className="hidden md:block" />}
-                <MaskedWord accent={w.accent}>{w.t}</MaskedWord>{" "}
+      {/* Main layout container */}
+      <div className="relative flex flex-col items-center lg:items-start xl:items-center">
+        {/* Chat card */}
+        <div className="relative w-full max-w-[380px] sm:max-w-[420px] rounded-[1.75rem] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#111113] p-4 sm:p-5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] transition-all">
+          
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800/80 pb-3">
+            <div className="flex items-center gap-2.5">
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-violet-600 text-white font-bold text-xs shadow-xs">
+                Z
               </span>
-            ))}
-          </motion.h1>
-
-          <motion.p
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.8, ease: EASE as unknown as number[] }}
-            className="mt-7 max-w-xl text-lg leading-relaxed text-zinc-400 sm:text-xl"
-          >
-            Zyntai is the AI-powered platform where customers{" "}
-            <span className="text-zinc-200">browse, order, and get answers in seconds</span> — while
-            you automate the busywork and grow revenue.
-          </motion.p>
-
-          <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: EASE as unknown as number[] }}
-            className="mt-9 flex flex-wrap items-center gap-4"
-          >
-            <Magnetic>
-              <Link to="/signup" className="btn btn-primary group relative overflow-hidden px-7 py-3.5 text-[0.98rem]">
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                Start free trial
-                <IconArrow className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </Magnetic>
-            <button onClick={() => setDemoOpen(true)} className="btn btn-ghost group px-6 py-3.5 text-[0.98rem] font-semibold">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-violet-500/15 text-violet-400 transition-transform duration-300 group-hover:scale-110">
-                <IconPlay className="h-3.5 w-3.5 translate-x-[1px]" />
-              </span>
-              Watch 60s demo
-            </button>
-          </motion.div>
-
-          <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.95, duration: 0.8, ease: EASE as unknown as number[] }}
-            className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3"
-          >
-            <div className="flex -space-x-2.5">
-              {["ML", "DR", "AO", "JK"].map((ini, i) => (
-                <span
-                  key={ini}
-                  className={`grid h-9 w-9 place-items-center rounded-full border-2 border-char-950 text-[0.62rem] font-bold text-white ${
-                    ["bg-violet-600", "bg-zinc-700", "bg-violet-700", "bg-zinc-800"][i]
-                  }`}
-                >
-                  {ini}
+              <div>
+                <h4 className="font-display text-[0.88rem] font-bold text-zinc-900 dark:text-zinc-100 leading-none">
+                  Zyntai AI
+                </h4>
+                <span className="mt-0.5 flex items-center gap-1 text-[0.68rem] font-medium text-emerald-500">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Online
                 </span>
-              ))}
-              <span className="grid h-9 w-9 place-items-center rounded-full border-2 border-char-950 bg-char-800 text-[0.6rem] font-bold text-violet-400">
-                12k+
-              </span>
-            </div>
-            <div>
-              <div className="flex items-center gap-1 text-amber-400">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <IconStar key={i} className="h-3.5 w-3.5" />
-                ))}
-                <span className="ml-1.5 text-[0.8rem] font-semibold text-zinc-200">4.9/5</span>
               </div>
-              <p className="mt-0.5 text-[0.8rem] text-zinc-500">
-                Trusted by <span className="font-semibold text-violet-400">12,000+ businesses</span> · no credit card required
-              </p>
+            </div>
+            <button className="grid h-7 w-7 place-items-center rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+                <circle cx="5" cy="12" r="1.8" />
+                <circle cx="12" cy="12" r="1.8" />
+                <circle cx="19" cy="12" r="1.8" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Conversation stream */}
+          <div className="mt-3.5 space-y-2.5 text-[0.8rem] sm:text-[0.84rem]">
+            {/* User message 1 */}
+            <div className="flex justify-start">
+              <div className="max-w-[84%] rounded-2xl rounded-tl-xs bg-zinc-100 dark:bg-[#1E1E22] px-3.5 py-2.5 text-zinc-800 dark:text-zinc-200 leading-relaxed shadow-xs">
+                Hi! I'm looking for a customized gift for my friend. Can you help?
+              </div>
+            </div>
+
+            {/* AI message 1 */}
+            <div className="flex justify-end">
+              <div className="max-w-[84%] rounded-2xl rounded-tr-xs bg-violet-600 px-3.5 py-2.5 text-white font-medium leading-relaxed shadow-sm">
+                Of course! 🎁 What type of item are you looking for?
+              </div>
+            </div>
+
+            {/* Option pills */}
+            <div className="flex flex-wrap items-center justify-end gap-1.5 py-0.5">
+              {options.map((opt) => {
+                const active = selectedOption === opt;
+                return (
+                  <button
+                    key={opt}
+                    onClick={() => setSelectedOption(opt)}
+                    className={`rounded-full px-3 py-1 text-[0.72rem] font-medium transition-all ${
+                      active
+                        ? "border border-violet-500 bg-violet-50 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 font-semibold shadow-xs"
+                        : "border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-[#18181B] text-zinc-600 dark:text-zinc-400 hover:border-violet-400 hover:text-violet-600"
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* User message 2 */}
+            <div className="flex justify-start">
+              <div className="max-w-[80%] rounded-2xl rounded-tl-xs bg-zinc-100 dark:bg-[#1E1E22] px-3.5 py-2 text-zinc-800 dark:text-zinc-200 leading-relaxed shadow-xs">
+                A bracelet with her name.
+              </div>
+            </div>
+
+            {/* AI message 2 */}
+            <div className="flex justify-end">
+              <div className="max-w-[88%] rounded-2xl rounded-tr-xs bg-violet-600 px-3.5 py-2 text-white font-medium leading-relaxed shadow-sm">
+                Great choice! Here are some options for you ✨
+              </div>
+            </div>
+
+            {/* Product cards row */}
+            <div className="grid grid-cols-3 gap-2 pt-1">
+              {/* Product 1 */}
+              <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#18181B] p-1.5 transition-all hover:border-violet-500 hover:shadow-xs">
+                <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg bg-amber-500/5">
+                  <svg viewBox="0 0 120 70" className="h-full w-full">
+                    <path d="M10 35 C 25 15, 40 25, 50 35 C 60 45, 75 55, 110 35" fill="none" stroke="#D97706" strokeWidth="1.8" strokeDasharray="3 2" />
+                    <text x="60" y="38" textAnchor="middle" fill="#D97706" fontSize="13" fontFamily="cursive" fontWeight="bold">Always</text>
+                  </svg>
+                </div>
+                <div className="mt-1 px-1">
+                  <p className="truncate text-[0.68rem] font-semibold text-zinc-900 dark:text-zinc-100">Name Cuff</p>
+                  <p className="text-[0.62rem] font-bold text-violet-600 dark:text-violet-400">₹1,499</p>
+                </div>
+              </div>
+
+              {/* Product 2 */}
+              <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#18181B] p-1.5 transition-all hover:border-violet-500 hover:shadow-xs">
+                <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg bg-rose-500/5">
+                  <svg viewBox="0 0 120 70" className="h-full w-full">
+                    <ellipse cx="60" cy="35" rx="36" ry="18" fill="none" stroke="#E11D48" strokeWidth="5" strokeDasharray="7 4" />
+                    <ellipse cx="60" cy="35" rx="36" ry="18" fill="none" stroke="#F59E0B" strokeWidth="5" strokeDasharray="2 9" />
+                  </svg>
+                </div>
+                <div className="mt-1 px-1">
+                  <p className="truncate text-[0.68rem] font-semibold text-zinc-900 dark:text-zinc-100">Coral Bead</p>
+                  <p className="text-[0.62rem] font-bold text-violet-600 dark:text-violet-400">₹899</p>
+                </div>
+              </div>
+
+              {/* Product 3 */}
+              <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#18181B] p-1.5 transition-all hover:border-violet-500 hover:shadow-xs">
+                <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-lg bg-slate-500/5">
+                  <svg viewBox="0 0 120 70" className="h-full w-full">
+                    <path d="M15 35 C 30 18, 50 20, 60 30 C 70 20, 90 18, 105 35" fill="none" stroke="#94A3B8" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="4 3" />
+                    <path d="M60 33 C 58 26, 50 27, 50 33 C 50 39, 60 46, 60 46 C 60 46, 70 39, 70 33 C 70 27, 62 26, 60 33 Z" fill="none" stroke="#94A3B8" strokeWidth="1.8" />
+                  </svg>
+                </div>
+                <div className="mt-1 px-1">
+                  <p className="truncate text-[0.68rem] font-semibold text-zinc-900 dark:text-zinc-100">Heart Link</p>
+                  <p className="text-[0.62rem] font-bold text-violet-600 dark:text-violet-400">₹1,299</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Input bar */}
+            <div className="mt-3 flex items-center justify-between rounded-full border border-zinc-200 dark:border-zinc-700/80 bg-zinc-50 dark:bg-[#18181B] px-3.5 py-1.5 shadow-xs">
+              <span className="text-[0.76rem] text-zinc-400">Type a message...</span>
+              <button
+                aria-label="Send"
+                className="grid h-6 w-6 place-items-center rounded-full bg-violet-600 text-white shadow-xs transition-transform hover:scale-110 active:scale-95"
+              >
+                <svg viewBox="0 0 24 24" className="h-3 w-3 translate-x-px" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m22 2-7 20-4-9-9-4Z" />
+                  <path d="M22 2 11 13" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Side Cards (Desktop & Tablet) */}
+        <div className="hidden sm:block">
+          {/* Total Sales Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6, duration: 0.7 }}
+            className="absolute -top-3 -right-2 md:-right-6 lg:-right-8 xl:-right-10 z-20 w-44 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-[#111113]/95 p-3.5 shadow-xl backdrop-blur-md"
+          >
+            <p className="text-[0.68rem] font-medium text-zinc-500 dark:text-zinc-400">Total Sales</p>
+            <p className="mt-0.5 text-[1.18rem] font-bold tracking-tight text-zinc-950 dark:text-white">₹ 2,48,900</p>
+            <div className="mt-2 flex items-end justify-between">
+              <span className="flex items-center text-[0.72rem] font-semibold text-emerald-500">
+                ↑ 32%
+              </span>
+              <div className="flex items-end gap-1.5">
+                {[35, 60, 48, 80, 100].map((h, i) => (
+                  <span
+                    key={i}
+                    style={{ height: `${h * 0.26}px` }}
+                    className="w-2 rounded-t-xs bg-gradient-to-t from-violet-600 to-violet-400"
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Metric Card 1: 12,000+ Active Businesses */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.75, duration: 0.7 }}
+            className="absolute top-28 -right-2 md:-right-6 lg:-right-8 xl:-right-10 z-20 flex w-48 items-center gap-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-[#111113]/95 p-3 shadow-lg backdrop-blur-md"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-violet-100 dark:bg-violet-500/15 text-violet-600 dark:text-violet-400">
+              <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </span>
+            <div>
+              <p className="text-[0.84rem] font-bold text-zinc-950 dark:text-white leading-tight">12,000+</p>
+              <p className="text-[0.68rem] text-zinc-500 dark:text-zinc-400">Active Businesses</p>
+            </div>
+          </motion.div>
+
+          {/* Metric Card 2: 98% Customer Satisfaction */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9, duration: 0.7 }}
+            className="absolute top-48 -right-2 md:-right-6 lg:-right-8 xl:-right-10 z-20 flex w-48 items-center gap-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-[#111113]/95 p-3 shadow-lg backdrop-blur-md"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-violet-100 dark:bg-violet-500/15 text-violet-600 dark:text-violet-400">
+              <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+            </span>
+            <div>
+              <p className="text-[0.84rem] font-bold text-zinc-950 dark:text-white leading-tight">98%</p>
+              <p className="text-[0.68rem] text-zinc-500 dark:text-zinc-400">Customer Satisfaction</p>
+            </div>
+          </motion.div>
+
+          {/* Handwritten Annotation: Automate Engage Grow */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.1, duration: 0.7 }}
+            className="absolute -bottom-6 right-0 sm:right-2 lg:-right-4 select-none pointer-events-none z-20 flex flex-col items-center"
+          >
+            <svg viewBox="0 0 100 60" className="w-16 h-10 text-violet-500/80 -rotate-12 mb-0.5">
+              <path d="M80 50 C 50 45, 25 35, 12 15 M 12 15 L 14 26 M 12 15 L 24 16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <div className="font-accent italic text-lg sm:text-xl font-bold leading-tight text-violet-600 dark:text-violet-300 drop-shadow-xs">
+              <span className="block transform -rotate-4">Automate</span>
+              <span className="block transform rotate-2 pl-2">Engage</span>
+              <span className="block transform -rotate-3 pl-4">Grow</span>
             </div>
           </motion.div>
         </div>
+      </div>
+    </motion.div>
+  );
+}
 
-        {/* mockup */}
-        <div className="relative mt-16 pb-10 sm:mt-20 lg:pb-16">
-          <FloatChips />
-          <RotatingBadge />
-          <DashboardMockup />
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.6 }}
-            className="mt-8 flex items-center justify-center gap-2 text-[0.78rem] text-zinc-600"
-          >
-            <span className="inline-block h-4 w-4 animate-bob">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 4v14m0 0-5-5m5 5 5-5" />
-              </svg>
-            </span>
-            Live product preview — orders stream in every few seconds
-          </motion.p>
+export default function Hero({ introReady = true }: { introReady?: boolean }) {
+  const reduce = useReducedMotion();
+  const [demoOpen, setDemoOpen] = useState(false);
+
+  return (
+    <section className="relative min-h-[92vh] overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40">
+      {/* Background Lighting */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-1/2 top-0 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-violet-600/[0.07] blur-[140px]" />
+        <div className="absolute -left-32 top-32 h-80 w-80 rounded-full bg-violet-500/[0.04] blur-2xl" />
+        <div className="absolute -right-32 top-16 h-80 w-80 rounded-full bg-violet-700/[0.04] blur-2xl" />
+      </div>
+      <FluidBg className="opacity-35" />
+      <Embers />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+          
+          {/* Left Column: Headline, Subtitle, CTAs, 3 Value Props */}
+          <div className="lg:col-span-6 xl:col-span-5">
+            {/* Live pill badge */}
+            <motion.div
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: EASE as unknown as number[] }}
+              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-zinc-200 dark:border-char-700 bg-white/90 dark:bg-char-900/80 py-1.5 pl-2 pr-4 shadow-xs backdrop-blur-md"
+            >
+              <span className="flex items-center gap-1.5 rounded-full bg-violet-100 dark:bg-violet-500/15 px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-violet-700 dark:text-violet-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-violet-600 dark:bg-violet-400 animate-pulse-dot" /> LIVE
+              </span>
+              <span className="text-[0.82rem] text-zinc-600 dark:text-zinc-300">
+                Now powering <span className="font-semibold text-zinc-950 dark:text-white">12,000+ businesses</span>
+              </span>
+            </motion.div>
+
+            {/* Main Headline */}
+            <motion.h1
+              variants={container}
+              initial="hidden"
+              animate={introReady ? "show" : "hidden"}
+              className="font-display text-[2.75rem] font-bold leading-[1.04] tracking-tight sm:text-5xl lg:text-6xl xl:text-[4.2rem]"
+            >
+              <span className="block">
+                <MaskedWord>Turn</MaskedWord>{" "}
+                <MaskedWord accent>conversations</MaskedWord>
+              </span>
+              <span className="block mt-1 sm:mt-2">
+                <MaskedWord>into</MaskedWord>{" "}
+                <MaskedWord accent>customers.</MaskedWord>
+              </span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8, ease: EASE as unknown as number[] }}
+              className="mt-6 max-w-lg text-[1.02rem] leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-[1.08rem]"
+            >
+              Zyntai is the AI-powered platform where customers{" "}
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100">browse, order, and get answers in seconds</span> — while
+              you automate the busywork and grow revenue.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.65, duration: 0.8, ease: EASE as unknown as number[] }}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
+              <Magnetic>
+                <Link to="/signup" className="btn btn-primary group relative overflow-hidden rounded-xl px-7 py-3.5 text-[0.95rem] font-medium shadow-md">
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                  Start free trial
+                  <IconArrow className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              </Magnetic>
+              <button
+                onClick={() => setDemoOpen(true)}
+                className="btn group flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-char-700 bg-zinc-100/90 dark:bg-char-800/80 px-6 py-3.5 text-[0.95rem] font-semibold text-zinc-800 dark:text-zinc-200 shadow-xs transition-colors hover:bg-zinc-200/80 dark:hover:bg-char-700"
+              >
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-violet-100 dark:bg-violet-500/20 text-violet-600 dark:text-violet-400 transition-transform duration-300 group-hover:scale-110">
+                  <IconPlay className="h-3 w-3 translate-x-px" />
+                </span>
+                Watch 60s demo
+              </button>
+            </motion.div>
+
+            {/* 3 Value Props (Quick setup, Boost sales, Happier customers) */}
+            <motion.div
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.8, ease: EASE as unknown as number[] }}
+              className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-zinc-200/80 dark:border-char-700/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-violet-100 dark:bg-violet-500/15 text-violet-600 dark:text-violet-400">
+                  <IconBolt className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-[0.82rem] font-bold text-zinc-900 dark:text-zinc-100 leading-tight">Quick setup</p>
+                  <p className="text-[0.72rem] text-zinc-500 dark:text-zinc-400">Get started in minutes</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-violet-100 dark:bg-violet-500/15 text-violet-600 dark:text-violet-400">
+                  <IconChart className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-[0.82rem] font-bold text-zinc-900 dark:text-zinc-100 leading-tight">Boost sales</p>
+                  <p className="text-[0.72rem] text-zinc-500 dark:text-zinc-400">Turn chats into revenue</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-violet-100 dark:bg-violet-500/15 text-violet-600 dark:text-violet-400">
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="text-[0.82rem] font-bold text-zinc-900 dark:text-zinc-100 leading-tight">Happier customers</p>
+                  <p className="text-[0.72rem] text-zinc-500 dark:text-zinc-400">24/7 AI support</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: AI Conversational & Analytics Showcase Mockup */}
+          <div className="lg:col-span-6 xl:col-span-7 pt-4 lg:pt-0">
+            <HeroShowcase />
+          </div>
+
         </div>
       </div>
 

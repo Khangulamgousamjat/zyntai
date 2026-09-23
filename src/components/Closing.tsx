@@ -21,13 +21,13 @@ export function FinalCta() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.14),transparent_65%)]" />
 
         <Reveal>
-          <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.3em] text-violet-400">
+          <p className="font-display text-[0.72rem] font-bold uppercase tracking-[0.3em] text-violet-600 dark:text-violet-400">
             Your next quarter could be different
           </p>
         </Reveal>
         <Reveal delay={0.08}>
           <h2 className="font-display relative mx-auto mt-5 max-w-3xl text-balance text-4xl font-bold leading-[1.04] tracking-tight text-zinc-50 sm:text-6xl">
-            Ready to grow your <em className="font-accent font-normal italic text-violet-400">business?</em>
+            Ready to grow your <em className="font-accent font-normal italic text-violet-600 dark:text-violet-400">business?</em>
           </h2>
         </Reveal>
         <Reveal delay={0.16}>

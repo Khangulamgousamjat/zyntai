@@ -6,14 +6,13 @@ export const NAV_LINKS = [
 ];
 
 export const LOGOS = [
-  { name: "NOVA", style: "wide" },
-  { name: "Pulse", style: "serif" },
-  { name: "Drift", style: "script" },
-  { name: "ATLAS", style: "wide" },
-  { name: "Ember", style: "serif" },
-  { name: "FLUX", style: "wide" },
-  { name: "Loop", style: "script" },
-  { name: "Vertex", style: "serif" },
+  { name: "boAt", style: "bold" },
+  { name: "Nykaa", style: "serif" },
+  { name: "swiggy", style: "bold" },
+  { name: "zomato", style: "bold" },
+  { name: "Flipkart", style: "bold" },
+  { name: "amazon", style: "bold" },
+  { name: "and 12,000+ more", style: "meta" },
 ] as const;
 
 export type FeatureKey = "ai" | "order" | "dashboard" | "upsell" | "insights" | "reengage";
